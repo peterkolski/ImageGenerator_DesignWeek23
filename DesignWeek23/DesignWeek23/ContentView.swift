@@ -24,11 +24,9 @@ struct ContentView: View {
                     .padding()
             }
             
-            if !errorMessage.isEmpty {
-                Text(errorMessage)
-                    .foregroundColor(.red)
-                    .padding()
-            }
+            Text(errorMessage)
+                .foregroundColor(.red)
+                .padding()
         }
     }
     
@@ -50,7 +48,8 @@ struct ContentView: View {
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 // Handle the error
-                self.errorMessage = "Error: \(error.localizedDescription)"
+                let message = self.messageForErrorCode(error._code)
+                self.errorMessage = "Error: \(message)"
                 return
             }
             
@@ -74,14 +73,65 @@ struct ContentView: View {
                         self.image = image
                     }
                 }
+                
+                // Clear any previous error messages
+                self.errorMessage = ""
             } else {
                 // Handle non-200 status code
-                self.errorMessage = "Error: Received non-200 status code: \(response.statusCode)"
+                let message = self.messageForErrorCode(response.statusCode)
+                self.errorMessage = "Error: \(message)"
             }
         }
         
         task.resume()
     }
+    
+    func messageForErrorCode(_ errorCode: Int) -> String {
+        switch errorCode {
+        case -1001:
+            return "The request timed out"
+        case -1003:
+            return "A URL is malformed"
+        case -1004:
+            return "The resource could not be found"
+        case -1005:
+            return "The network connection was lost"
+        case -1009:
+            return "The internet connection is offline"
+        case -1010:
+            return "The request was not allowed"
+        case -1011:
+            return "The server encountered an error"
+        case -1012:
+            return "The user cancelled the request"
+        case -1013:
+            return "The request was too large"
+        case -1014:
+            return "The server requires authentication"
+        case -1015:
+            return "The server requires a secure connection"
+        case -1100..<0:
+            return "An unknown networking error occurred"
+        case 400:
+            return "The request was malformed or invalid"
+        case 401:
+            return "Authentication failed or user not authorized"
+        case 403:
+            return "The user is not allowed to access the resource"
+        case 404:
+            return "The requested resource was not found"
+        case 405:
+            return "The method is not allowed for the resource"
+        case 500:
+            return "A server error occurred"
+        case 503:
+            return "The service is unavailable"
+        default:
+            print("Unknown error code: \(errorCode)")
+            return "An unknown error occurred"
+        }
+    }
+
 }
 
 struct ContentView_Previews: PreviewProvider {
