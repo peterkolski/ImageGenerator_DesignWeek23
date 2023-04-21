@@ -58,7 +58,7 @@ struct ContentView: View {
             "width": Constants.imageWidth,
             "sampler": "K_DPM_2_ANCESTRAL",
             "samples": 1,
-            "steps": 75,
+            "steps": 5,
             "text_prompts": [
                 [
                     "text": userInput,
@@ -80,13 +80,34 @@ struct ContentView: View {
                 return
             }
             
+            
             if let httpResponse = response as? HTTPURLResponse {
+                // Log the response headers
+                let responseHeaders = httpResponse.allHeaderFields
+                print("Response headers: \(responseHeaders)")
+
                 switch httpResponse.statusCode {
                 case 200:
-                    if let image = UIImage(data: data) {
+                    // Parse the base64-encoded image from the response data
+//                    guard let imageString = String(data: data, encoding: .utf8) else {
+//                        // Handle invalid image string
+//                        print("Error: Invalid image string")
+//                        return
+//                    }
+                    guard let imageData = Data(base64Encoded: data) else {
+                        // Handle invalid base64-encoded image data
+                        print("Error: Invalid base64-encoded image data")
+                        return
+                    }
+                    guard let image = UIImage(data: imageData) else {
+                        // Handle invalid image data
+                        print("Error: Invalid image data")
+                        return
+                    }
+                    
+                    DispatchQueue.main.async {
+                        // Update the image in the UI
                         self.image = Image(uiImage: image)
-                    } else {
-                        errorMessage = "Invalid image data"
                     }
                 case 400:
                     errorMessage = "Bad request"
