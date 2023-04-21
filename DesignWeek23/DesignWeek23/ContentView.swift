@@ -34,8 +34,12 @@ struct ContentView: View {
     }
     
     func getImage() {
-        let apiKey = Constants.apiKey
-        let urlString = "https://platform.stability.ai/rest-api/convert-to-image"
+        guard let apiKey = Constants.apiKey else {
+            errorMessage = "API key not set"
+            return
+        }
+
+        let urlString = "https://api.stability.ai/v1/generation/\(Constants.engineID)/text-to-image"
         
         guard let url = URL(string: urlString) else {
             errorMessage = "Invalid URL"
@@ -45,10 +49,22 @@ struct ContentView: View {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue(apiKey, forHTTPHeaderField: "X-API-KEY")
+        request.addValue(apiKey, forHTTPHeaderField: "Authorization")
         
         let parameters: [String: Any] = [
-            "text": userInput
+            "cfg_scale": 7,
+            "clip_guidance_preset": "FAST_BLUE",
+            "height": Constants.imageHeight,
+            "width": Constants.imageWidth,
+            "sampler": "K_DPM_2_ANCESTRAL",
+            "samples": 1,
+            "steps": 75,
+            "text_prompts": [
+                [
+                    "text": userInput,
+                    "weight": 1
+                ]
+            ]
         ]
         
         guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else {
@@ -94,14 +110,11 @@ struct ContentView: View {
             }
         }.resume()
     }
+
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
-}
-
-struct Constants {
-    static let apiKey = "sk-zUcWdOuTDjZR3gURbarc49AI7YOS5DMNk8b07V9g5v8hkVGl"
 }
