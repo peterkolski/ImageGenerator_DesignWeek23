@@ -11,6 +11,7 @@
 		DB9CBFDF29F2CE8500C83111 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9CBFDE29F2CE8500C83111 /* ContentView.swift */; };
 		DB9CBFE129F2CE8600C83111 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB9CBFE029F2CE8600C83111 /* Assets.xcassets */; };
 		DB9CBFE429F2CE8600C83111 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB9CBFE329F2CE8600C83111 /* Preview Assets.xcassets */; };
+		DB9CBFEB29F2DFEA00C83111 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9CBFEA29F2DFEA00C83111 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,8 @@
 		DB9CBFDE29F2CE8500C83111 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		DB9CBFE029F2CE8600C83111 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DB9CBFE329F2CE8600C83111 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		DB9CBFEA29F2DFEA00C83111 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		DB9CBFEC29F2E11D00C83111 /* REST API Play.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "REST API Play.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,8 +54,10 @@
 		DB9CBFDB29F2CE8500C83111 /* DesignWeek23 */ = {
 			isa = PBXGroup;
 			children = (
+				DB9CBFEC29F2E11D00C83111 /* REST API Play.playground */,
 				DB9CBFDC29F2CE8500C83111 /* DesignWeek23App.swift */,
 				DB9CBFDE29F2CE8500C83111 /* ContentView.swift */,
+				DB9CBFEA29F2DFEA00C83111 /* Constants.swift */,
 				DB9CBFE029F2CE8600C83111 /* Assets.xcassets */,
 				DB9CBFE229F2CE8600C83111 /* Preview Content */,
 			);
@@ -139,6 +144,7 @@
 			files = (
 				DB9CBFDF29F2CE8500C83111 /* ContentView.swift in Sources */,
 				DB9CBFDD29F2CE8500C83111 /* DesignWeek23App.swift in Sources */,
+				DB9CBFEB29F2DFEA00C83111 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
