@@ -65,11 +65,11 @@ func generateImage(from text: String, completion: @escaping (Result<UIImage, Err
         "width": Constants.imageWidth,
         "sampler": "K_DPM_2_ANCESTRAL",
         "samples": 1,
-        "steps": 75,
+        "steps": 20,
         "text_prompts": [
             [
                 "text": text,
-                "weight": 1
+                "weight": 20
             ]
         ]
     ]
