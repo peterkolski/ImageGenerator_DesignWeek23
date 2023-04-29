@@ -53,30 +53,38 @@ struct ContentView: View {
                             }
                         }
                         VStack{
-                            // Display the generated image
-                            if let image = viewModel.image {
-                                Image(uiImage: image)
+                            if let lastText = viewModel.lastText{
+                                // Display the generated image
+                                if let image = viewModel.image {
+                                    Image(uiImage: image)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: isFullScreen ? geometry.size.width : geometry.size.width * 0.5,
+                                               height: isFullScreen ? geometry.size.height : geometry.size.height * 0.5)
+                                    //                            .background(Color.black)
+                                        .cornerRadius(isFullScreen ? 0 : 10)
+                                        .gesture(TapGesture().onEnded {
+                                            withAnimation(.easeInOut(duration: 0.3)) {
+                                                isFullScreen.toggle()
+                                            }
+                                        })
+                                        .edgesIgnoringSafeArea(isFullScreen ? .all : [])
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 8)
+                                                .stroke(Color.gray, lineWidth: 1) // Add a gray border
+                                        )
+                                }
+                                
+                                Text("Last Text: ")
+                                Text(lastText)
+                            } else{
+                                Image(systemName: "photo.artframe" )
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: isFullScreen ? geometry.size.width : geometry.size.width * 0.5,
                                            height: isFullScreen ? geometry.size.height : geometry.size.height * 0.5)
-                                //                            .background(Color.black)
-                                    .cornerRadius(isFullScreen ? 0 : 10)
-                                    .gesture(TapGesture().onEnded {
-                                        withAnimation(.easeInOut(duration: 0.3)) {
-                                            isFullScreen.toggle()
-                                        }
-                                    })
-                                    .edgesIgnoringSafeArea(isFullScreen ? .all : [])
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 8)
-                                            .stroke(Color.gray, lineWidth: 1) // Add a gray border
-                                    )
-                            }
-                            
-                            if let lastText = viewModel.lastText{
-                                Text("Last Text: ")
-                                Text(lastText)
+                                
+                                Text("No Text Entered yet")
                             }
                         }
                     }
