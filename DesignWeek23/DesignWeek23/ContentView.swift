@@ -32,12 +32,20 @@ struct ContentView: View {
                                 }
                             })
                             .edgesIgnoringSafeArea(isFullScreen ? .all : [])
+                            .overlay(
+                                   RoundedRectangle(cornerRadius: 8)
+                                       .stroke(Color.gray, lineWidth: 1) // Add a gray border
+                               )
                     }
                     
                     if !isFullScreen{
                         // Text input field
                         TextField("Enter text", text: $text)
                             .padding()
+                            .overlay(
+                                   RoundedRectangle(cornerRadius: 8)
+                                       .stroke(Color.gray, lineWidth: 1) // Add a gray border
+                               )
                         
                         // Display any error message
                         if let errorMessage = errorMessage {
@@ -60,6 +68,10 @@ struct ContentView: View {
                             }
                         }
                         .padding()
+                        .overlay(
+                               RoundedRectangle(cornerRadius: 8)
+                                   .stroke(Color.gray, lineWidth: 1) // Add a gray border
+                           )
                     }
                 }
             }
