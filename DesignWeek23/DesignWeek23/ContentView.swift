@@ -32,6 +32,12 @@ struct ContentView: View {
                                         .padding()
                                 }
                                 
+                                StyleView()
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .stroke(Color.gray, lineWidth: 1) // Add a gray border
+                                    )
+                                
                                 // Button to generate the image
                                 Button("Generate image") {
                                     viewModel.generateImage { result in
