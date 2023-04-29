@@ -16,64 +16,68 @@ struct ContentView: View {
                 }
                 
                 GeometryReader { geometry in
-                VStack {
-                    // Display the generated image
-                    if let image = image {
-                        Image(uiImage: image)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: isFullScreen ? geometry.size.width : geometry.size.width * 0.5,
-                                   height: isFullScreen ? geometry.size.height : geometry.size.height * 0.5)
-//                            .background(Color.black)
-                            .cornerRadius(isFullScreen ? 0 : 10)
-                            .gesture(TapGesture().onEnded {
-                                withAnimation(.easeInOut(duration: 0.3)) {
-                                    isFullScreen.toggle()
+                    HStack {
+                        VStack{
+                            if !isFullScreen{
+                                // Text input field
+                                TextField("Enter text", text: $text)
+                                    .padding()
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .stroke(Color.gray, lineWidth: 1) // Add a gray border
+                                    )
+                                
+                                // Display any error message
+                                if let errorMessage = errorMessage {
+                                    Text(errorMessage)
+                                        .foregroundColor(.red)
+                                        .padding()
                                 }
-                            })
-                            .edgesIgnoringSafeArea(isFullScreen ? .all : [])
-                            .overlay(
-                                   RoundedRectangle(cornerRadius: 8)
-                                       .stroke(Color.gray, lineWidth: 1) // Add a gray border
-                               )
-                    }
-                    
-                    if !isFullScreen{
-                        // Text input field
-                        TextField("Enter text", text: $text)
-                            .padding()
-                            .overlay(
-                                   RoundedRectangle(cornerRadius: 8)
-                                       .stroke(Color.gray, lineWidth: 1) // Add a gray border
-                               )
-                        
-                        // Display any error message
-                        if let errorMessage = errorMessage {
-                            Text(errorMessage)
-                                .foregroundColor(.red)
+                                
+                                // Button to generate the image
+                                Button("Generate image") {
+                                    generateImage(from: text) { result in
+                                        switch result {
+                                        case .success(let image):
+                                            self.image = image
+                                            self.errorMessage = nil
+                                        case .failure(let error):
+                                            self.image = nil
+                                            self.errorMessage = error.localizedDescription
+                                        }
+                                    }
+                                }
                                 .padding()
-                        }
-                        
-                        // Button to generate the image
-                        Button("Generate image") {
-                            generateImage(from: text) { result in
-                                switch result {
-                                case .success(let image):
-                                    self.image = image
-                                    self.errorMessage = nil
-                                case .failure(let error):
-                                    self.image = nil
-                                    self.errorMessage = error.localizedDescription
-                                }
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .stroke(Color.gray, lineWidth: 1) // Add a gray border
+                                )
                             }
                         }
-                        .padding()
-                        .overlay(
-                               RoundedRectangle(cornerRadius: 8)
-                                   .stroke(Color.gray, lineWidth: 1) // Add a gray border
-                           )
+                        VStack{
+                            // Display the generated image
+                            if let image = image {
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: isFullScreen ? geometry.size.width : geometry.size.width * 0.5,
+                                           height: isFullScreen ? geometry.size.height : geometry.size.height * 0.5)
+                                //                            .background(Color.black)
+                                    .cornerRadius(isFullScreen ? 0 : 10)
+                                    .gesture(TapGesture().onEnded {
+                                        withAnimation(.easeInOut(duration: 0.3)) {
+                                            isFullScreen.toggle()
+                                        }
+                                    })
+                                    .edgesIgnoringSafeArea(isFullScreen ? .all : [])
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .stroke(Color.gray, lineWidth: 1) // Add a gray border
+                                    )
+                            }
+                            Text("Last Text: ")
+                        }
                     }
-                }
             }
         }
     }
