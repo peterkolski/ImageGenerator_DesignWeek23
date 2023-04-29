@@ -73,8 +73,11 @@ struct ContentView: View {
                                             .stroke(Color.gray, lineWidth: 1) // Add a gray border
                                     )
                             }
-                            Text("Last Text: ")
-                            Text("Text")
+                            
+                            if let lastText = viewModel.lastText{
+                                Text("Last Text: ")
+                                Text(lastText)
+                            }
                         }
                     }
             }

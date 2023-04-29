@@ -10,7 +10,7 @@ import SwiftUI
 
 class ImageGeneratorModel: ObservableObject {
     @Published var text = ""
-    @Published var lastText = ""
+    @Published var lastText : String? = nil
     @Published var image: UIImage? = nil
     @Published var errorMessage: String? = nil
     @Published var isLoading = false
@@ -61,6 +61,9 @@ class ImageGeneratorModel: ObservableObject {
                 completion(.failure(error ?? NSError(domain: "generateImage", code: 3, userInfo: [NSLocalizedDescriptionKey: "Unknown error"])))
                 return
             }
+            
+            self.lastText = self.text
+            self.text = ""
             
             // Debugging: print raw data
             print("Raw data:")
