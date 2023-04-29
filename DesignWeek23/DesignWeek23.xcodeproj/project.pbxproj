@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		DB2C01EE29FD70DA00BD826D /* ImageGeneratorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2C01ED29FD70DA00BD826D /* ImageGeneratorModel.swift */; };
 		DB2C01F029FD7D5200BD826D /* StyleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2C01EF29FD7D5200BD826D /* StyleView.swift */; };
+		DB2C01F229FD7FAE00BD826D /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2C01F129FD7FAE00BD826D /* InfoView.swift */; };
 		DB9CBFDD29F2CE8500C83111 /* DesignWeek23App.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9CBFDC29F2CE8500C83111 /* DesignWeek23App.swift */; };
 		DB9CBFE129F2CE8600C83111 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB9CBFE029F2CE8600C83111 /* Assets.xcassets */; };
 		DB9CBFE429F2CE8600C83111 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB9CBFE329F2CE8600C83111 /* Preview Assets.xcassets */; };
@@ -18,7 +19,8 @@
 
 /* Begin PBXFileReference section */
 		DB2C01ED29FD70DA00BD826D /* ImageGeneratorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGeneratorModel.swift; sourceTree = "<group>"; };
-		DB2C01EF29FD7D5200BD826D /* StyleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StyleView.swift; path = MainUI/StyleView.swift; sourceTree = "<group>"; };
+		DB2C01EF29FD7D5200BD826D /* StyleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleView.swift; sourceTree = "<group>"; };
+		DB2C01F129FD7FAE00BD826D /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		DB9CBFD929F2CE8500C83111 /* DesignWeek23.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DesignWeek23.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB9CBFDC29F2CE8500C83111 /* DesignWeek23App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignWeek23App.swift; sourceTree = "<group>"; };
 		DB9CBFE029F2CE8600C83111 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -42,6 +44,8 @@
 		DB2C01EC29FD6A1900BD826D /* MainUI */ = {
 			isa = PBXGroup;
 			children = (
+				DB2C01EF29FD7D5200BD826D /* StyleView.swift */,
+				DB2C01F129FD7FAE00BD826D /* InfoView.swift */,
 			);
 			path = MainUI;
 			sourceTree = "<group>";
@@ -68,7 +72,6 @@
 				DB9CBFEC29F2E11D00C83111 /* REST API Play.playground */,
 				DB9CBFDC29F2CE8500C83111 /* DesignWeek23App.swift */,
 				DBE4E54329F2FECE0004BD4A /* ContentView.swift */,
-				DB2C01EF29FD7D5200BD826D /* StyleView.swift */,
 				DB2C01ED29FD70DA00BD826D /* ImageGeneratorModel.swift */,
 				DB2C01EC29FD6A1900BD826D /* MainUI */,
 				DB9CBFEA29F2DFEA00C83111 /* Constants.swift */,
@@ -160,6 +163,7 @@
 				DB9CBFDD29F2CE8500C83111 /* DesignWeek23App.swift in Sources */,
 				DBE4E54429F2FECE0004BD4A /* ContentView.swift in Sources */,
 				DB9CBFEB29F2DFEA00C83111 /* Constants.swift in Sources */,
+				DB2C01F229FD7FAE00BD826D /* InfoView.swift in Sources */,
 				DB2C01EE29FD70DA00BD826D /* ImageGeneratorModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
