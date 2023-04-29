@@ -9,8 +9,9 @@ import SwiftUI
 
 struct Style: Identifiable, Equatable {
     let id = UUID()
-    let symbolName: String
-    let text: String
+    let image: String
+    let title: String
+    let promptStyleText: String
     
     static func == (lhs: Style, rhs: Style) -> Bool {
         lhs.id == rhs.id
@@ -19,10 +20,10 @@ struct Style: Identifiable, Equatable {
 
 struct StyleView: View {
     let styles = [
-        Style(symbolName: "cube", text: "3D Model"),
-        Style(symbolName: "photo", text: "Photographic"),
-        Style(symbolName: "scribble", text: "Sketch"),
-        Style(symbolName: "perspective", text: "Isometric")
+        Style(image: "cube", title: "3D Model", promptStyleText: ", style 3D model"),
+        Style(image: "photo", title: "Photographic", promptStyleText: ", style photographic"),
+        Style(image: "scribble", title: "Sketch", promptStyleText: ", style sketch"),
+        Style(image: "perspective", title: "Isometric", promptStyleText: ", style isometric")
     ]
     
     @State private var selectedStyle: Style?
@@ -33,31 +34,30 @@ struct StyleView: View {
                 .font(.largeTitle)
                 .padding()
             
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 100, maximum: 200))], spacing: 20) {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 200, maximum: 400))], spacing: 20) {
                 ForEach(styles) { style in
                     Button(action: {
                         selectedStyle = style
                     }) {
                         VStack {
-                            Image(systemName: style.symbolName)
-                                .font(.system(size: 40))
+                            Image(systemName: style.image)
+                                .font(.system(size: 80))
                                 .padding()
                             
-                            Text(style.text)
+                            Text(style.title)
+                                .padding(7)
                         }
                         .frame(maxWidth: .infinity)
                         .background(Color(.systemGroupedBackground))
                         .cornerRadius(10)
                         .overlay(
                             RoundedRectangle(cornerRadius: 10)
-                                .stroke(style == selectedStyle ? Color.blue : Color.clear, lineWidth: 2)
+                                .stroke(style == selectedStyle ? Color.blue : Color.clear, lineWidth: 6)
                         )
                     }
                 }
             }
             .padding()
-            
-            Spacer()
         }
     }
 }

@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var isFullScreen = false
+    @State private var showInfoView = false
     @StateObject var viewModel = ImageGeneratorModel()
     
     var body: some View {
@@ -16,6 +17,18 @@ struct ContentView: View {
                 GeometryReader { geometry in
                     HStack {
                         VStack{
+                            VStack {
+                                HStack {
+                                    Spacer()
+                                    Button(action: {
+                                        showInfoView.toggle()
+                                    }) {
+                                        Image(systemName: "info.circle")
+                                            .font(.system(size: 40))
+                                            .padding()
+                                    }
+                                }
+                            }
                             if !isFullScreen{
                                 // Text input field
                                 TextField("Enter text", text: $viewModel.text)
@@ -38,6 +51,7 @@ struct ContentView: View {
                                             .stroke(Color.gray, lineWidth: 1) // Add a gray border
                                     )
                                 
+                                Spacer()
                                 // Button to generate the image
                                 Button("Generate image") {
                                     viewModel.generateImage { result in
