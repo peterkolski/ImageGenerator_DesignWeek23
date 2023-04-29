@@ -45,7 +45,7 @@ struct ContentView: View {
                                         .padding()
                                 }
                                 
-                                StyleView()
+                                StyleView(promtAddition: $viewModel.promtAddition)
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 8)
                                             .stroke(Color.gray, lineWidth: 1) // Add a gray border

@@ -18,6 +18,14 @@ struct Style: Identifiable, Equatable {
     }
 }
 
+struct ParentView: View {
+    @StateObject var viewModel = ImageGeneratorModel()
+
+    var body: some View {
+        StyleView(promtAddition: $viewModel.promtAddition)
+    }
+}
+
 struct StyleView: View {
     let styles = [
         Style(image: "cube", title: "3D Model", promptStyleText: ", style 3D model"),
@@ -27,6 +35,7 @@ struct StyleView: View {
     ]
     
     @State private var selectedStyle: Style?
+    @Binding var promtAddition: String
     
     var body: some View {
         VStack {
@@ -38,6 +47,7 @@ struct StyleView: View {
                 ForEach(styles) { style in
                     Button(action: {
                         selectedStyle = style
+                        promtAddition = style.promptStyleText
                     }) {
                         VStack {
                             Image(systemName: style.image)
@@ -64,7 +74,7 @@ struct StyleView: View {
 
 struct StyleView_Previews: PreviewProvider {
     static var previews: some View {
-        StyleView()
+        ParentView()
     }
 }
 

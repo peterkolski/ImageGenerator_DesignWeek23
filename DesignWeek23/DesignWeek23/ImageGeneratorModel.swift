@@ -10,6 +10,7 @@ import SwiftUI
 
 class ImageGeneratorModel: ObservableObject {
     @Published var text = ""
+    @Published var promtAddition = ""
     @Published var lastText : String? = nil
     @Published var image: UIImage? = nil
     @Published var errorMessage: String? = nil
@@ -43,7 +44,7 @@ class ImageGeneratorModel: ObservableObject {
             "steps": 20,
             "text_prompts": [
                 [
-                    "text": text,
+                    "text": text + promtAddition,
                     "weight": 20
                 ]
             ]
