@@ -68,56 +68,7 @@ struct ContentView: View {
 }
 
 
-//import SwiftUI
-//
-//struct ContentView: View {
-//    @State private var image = UIImage(named: "your_image_name")
-//    @State private var isFullScreen = false
-//
-//    var body: some View {
-//        GeometryReader { geometry in
-//            ZStack {
-//                if isFullScreen {
-//                    Color.black.edgesIgnoringSafeArea(.all)
-//                }
-//
-//                VStack {
-//                    Image(uiImage: image ?? UIImage())
-//                        .resizable()
-//                        .aspectRatio(contentMode: isFullScreen ? .fit : .fill)
-//                        .frame(width: isFullScreen ? geometry.size.width : geometry.size.width * 0.5,
-//                               height: isFullScreen ? geometry.size.height : geometry.size.height * 0.5)
-//                        .background(Color.black)
-//                        .cornerRadius(isFullScreen ? 0 : 10)
-//                        .gesture(TapGesture().onEnded {
-//                            withAnimation(.easeInOut(duration: 0.5)) {
-//                                isFullScreen.toggle()
-//                            }
-//                        })
-//
-//                    if !isFullScreen {
-//                        Button(action: {
-//                            print("Button tapped")
-//                        }) {
-//                            Text("Button")
-//                                .padding()
-//                                .background(Color.blue)
-//                                .foregroundColor(.white)
-//                                .cornerRadius(8)
-//                        }
-//                        .padding()
-//                    }
-//                }
-//            }
-//        }
-//    }
-//}
-//
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ContentView()
-//    }
-//}
+
 
 
 func generateImage(from text: String, completion: @escaping (Result<UIImage, Error>) -> Void) {
@@ -203,5 +154,6 @@ func generateImage(from text: String, completion: @escaping (Result<UIImage, Err
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .previewDevice(PreviewDevice(rawValue: "iPad Pro (11-inch)"))
     }
 }

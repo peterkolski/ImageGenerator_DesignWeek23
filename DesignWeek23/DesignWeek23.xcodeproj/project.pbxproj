@@ -37,6 +37,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DB2C01EC29FD6A1900BD826D /* MainUI */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MainUI;
+			sourceTree = "<group>";
+		};
 		DB9CBFD029F2CE8500C83111 = {
 			isa = PBXGroup;
 			children = (
@@ -60,6 +67,7 @@
 				DB9CBFDC29F2CE8500C83111 /* DesignWeek23App.swift */,
 				DB9CBFDE29F2CE8500C83111 /* ContentView2.swift */,
 				DBE4E54329F2FECE0004BD4A /* ContentView.swift */,
+				DB2C01EC29FD6A1900BD826D /* MainUI */,
 				DB9CBFEA29F2DFEA00C83111 /* Constants.swift */,
 				DB9CBFE029F2CE8600C83111 /* Assets.xcassets */,
 				DB9CBFE229F2CE8600C83111 /* Preview Content */,
@@ -275,7 +283,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"DesignWeek23/Preview Content\"";
 				DEVELOPMENT_TEAM = 73N26DTA23;
 				ENABLE_PREVIEWS = YES;
@@ -289,7 +297,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = peterkolski.DesignWeek23;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -304,7 +312,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"DesignWeek23/Preview Content\"";
 				DEVELOPMENT_TEAM = 73N26DTA23;
 				ENABLE_PREVIEWS = YES;
@@ -318,7 +326,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = peterkolski.DesignWeek23;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
