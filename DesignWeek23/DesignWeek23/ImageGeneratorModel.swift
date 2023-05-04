@@ -58,6 +58,7 @@ class ImageGeneratorModel: ObservableObject {
             "sampler": "K_DPM_2_ANCESTRAL",
             "samples": 1,
             "steps": 20,
+            // Warning: Heterogeneous collection literal could only be inferred to '[String : Any]'; add explicit type annotation if this is intentional
             "text_prompts": [
                 [
                     "text": text + promtAddition,
