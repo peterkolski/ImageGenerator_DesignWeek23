@@ -91,8 +91,8 @@ class ImageGeneratorModel: ObservableObject {
             }
             
             // Debugging: print raw data
-//            print("Raw data:")
-//            print(data)
+            //            print("Raw data:")
+            //            print(data)
             
             // Parse JSON response
             guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
@@ -111,8 +111,8 @@ class ImageGeneratorModel: ObservableObject {
             }
             
             // Debugging: print decoded data
-//            print("Decoded data:")
-//            print(imageData)
+            //            print("Decoded data:")
+            //            print(imageData)
             
             // Convert to UIImage
             guard let image = UIImage(data: imageData) else {
@@ -183,5 +183,5 @@ class ImageGeneratorModel: ObservableObject {
             return
         }
     }
-
+    
 }

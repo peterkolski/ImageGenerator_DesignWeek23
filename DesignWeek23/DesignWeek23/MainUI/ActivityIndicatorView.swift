@@ -13,7 +13,7 @@ struct ActivityIndicatorView: UIViewRepresentable {
         indicator.color = .white
         return indicator
     }
-
+    
     func updateUIView(_ uiView: UIActivityIndicatorView, context: Context) {
         uiView.startAnimating()
     }

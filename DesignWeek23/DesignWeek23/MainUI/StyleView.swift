@@ -20,7 +20,7 @@ struct Style: Identifiable, Equatable {
 
 struct ParentView: View {
     @StateObject var viewModel = ImageGeneratorModel()
-
+    
     var body: some View {
         StyleView(promtAddition: $viewModel.promtAddition)
     }

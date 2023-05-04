@@ -9,12 +9,12 @@ import SwiftUI
 
 struct InfoContentView: View {
     @State private var showInfoView = false
-
+    
     var body: some View {
         ZStack {
             Color(.lightGray)
                 .edgesIgnoringSafeArea(.all)
-
+            
             VStack {
                 HStack {
                     Spacer()
@@ -28,7 +28,7 @@ struct InfoContentView: View {
                 }
                 Spacer()
             }
-
+            
             if showInfoView {
                 InfoView(showInfoView: $showInfoView)
                     .transition(.opacity)
@@ -40,12 +40,12 @@ struct InfoContentView: View {
 
 struct InfoView: View {
     @Binding var showInfoView: Bool
-
+    
     var body: some View {
         ZStack {
             Color(.systemBackground)
                 .edgesIgnoringSafeArea(.all)
-
+            
             VStack {
                 HStack {
                     Spacer()
@@ -57,12 +57,12 @@ struct InfoView: View {
                             .padding()
                     }
                 }
-
+                
                 Spacer()
-
+                
                 Text("Info")
                     .font(.largeTitle)
-
+                
                 Spacer()
             }
         }
