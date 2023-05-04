@@ -12,7 +12,17 @@ struct ContentView: View {
                     Color.black
                         .opacity(isFullScreen ? 1 : 0)
                         .edgesIgnoringSafeArea(.all)
-                        .animation(.easeInOut(duration: 0.3))
+                        .transition(.opacity)
+                        .onAppear {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                isFullScreen = true
+                            }
+                        }
+                        .onDisappear {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                isFullScreen = false
+                            }
+                        }
                 }
                 
                 GeometryReader { geometry in
@@ -58,11 +68,15 @@ struct ContentView: View {
                                     viewModel.generateImage(folderName: folderName) { result in
                                         switch result {
                                         case .success(let image):
-                                            viewModel.image = image
-                                            viewModel.errorMessage = nil
+                                            DispatchQueue.main.async {
+                                                viewModel.image = image
+                                                viewModel.errorMessage = nil
+                                            }
                                         case .failure(let error):
-                                            viewModel.image = nil
-                                            viewModel.errorMessage = error.localizedDescription
+                                            DispatchQueue.main.async {
+                                                viewModel.image = nil
+                                                viewModel.errorMessage = error.localizedDescription
+                                            }
                                         }
                                     }
                                 }

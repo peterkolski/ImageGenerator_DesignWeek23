@@ -79,8 +79,10 @@ class ImageGeneratorModel: ObservableObject {
                 return
             }
             
-            self.lastText = self.text
-            self.text = ""
+            DispatchQueue.main.async {
+                self.lastText = self.text
+                self.text = ""
+            }
             
             // Debugging: print raw data
             print("Raw data:")
