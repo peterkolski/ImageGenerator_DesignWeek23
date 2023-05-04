@@ -8,8 +8,9 @@ struct ContentView: View {
     
     var body: some View {
         ZStack{
-            Color.gray
+            Color(red: 45/255, green: 48/255, blue: 58/255)
                 .edgesIgnoringSafeArea(.all)
+                
             if isFullScreen{
                 Color.black
                     .opacity(isFullScreen ? 1 : 0)
@@ -45,11 +46,8 @@ struct ContentView: View {
                         if !isFullScreen{
                             // Text input field
                             TextField("Enter text", text: $viewModel.text)
-                                .padding()
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 8)
-                                        .stroke(Color.gray, lineWidth: 1) // Add a gray border
-                                )
+                                .modifier(MyTextFieldStyle())
+                                
                             
                             // Display any error message
                             if let errorMessage = viewModel.errorMessage {
@@ -59,10 +57,6 @@ struct ContentView: View {
                             }
                             
                             StyleView(promtAddition: $viewModel.promtAddition)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 8)
-                                        .stroke(Color.gray, lineWidth: 1) // Add a gray border
-                                )
                             
                             Spacer()
                             // Button to generate the image
@@ -83,10 +77,12 @@ struct ContentView: View {
                                 }
                             }
                             .padding()
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color.gray, lineWidth: 1) // Add a gray border
-                            )
+                            .background(LinearGradient(gradient: Gradient(colors: [Color.blue, Color.pink]), startPoint: .leading, endPoint: .trailing) )
+                            .foregroundColor(.white)
+                            .bold()
+                            .cornerRadius(25)
+                            .padding()
+                            .shadow(color: .black, radius: 5, x: 5, y: 5)
                         }
                     }
                     VStack{
@@ -100,29 +96,35 @@ struct ContentView: View {
                                            height: isFullScreen ? geometry.size.height : geometry.size.height * 0.5)
                                 //                            .background(Color.black)
                                     .cornerRadius(isFullScreen ? 0 : 10)
+                                    .shadow(color: .black, radius: 5, x: 5, y: 5)
                                     .gesture(TapGesture().onEnded {
                                         withAnimation(.easeInOut(duration: 0.3)) {
                                             isFullScreen.toggle()
                                         }
                                     })
                                     .edgesIgnoringSafeArea(isFullScreen ? .all : [])
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 8)
-                                            .stroke(Color.gray, lineWidth: 1) // Add a gray border
-                                    )
                             }
-                            
-                            Text("Last Text: ")
-                            Text(lastText)
                         } else{
                             Image(systemName: "photo.artframe" )
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: isFullScreen ? geometry.size.width : geometry.size.width * 0.5,
                                        height: isFullScreen ? geometry.size.height : geometry.size.height * 0.5)
-                            
-                            Text("No Text Entered yet")
+                                .foregroundColor(.white)
+                        
                         }
+                        
+                        if let lastText = viewModel.lastText{
+                            Group{
+                                Text("Last Text: ")
+                                Text(lastText)
+                            }
+                            .modifier(MyTextFieldStyle())
+                        } else{
+                            Text("No Text Entered yet")
+                                .modifier(MyTextFieldStyle())
+                        }
+                        
                     }
                 }
             }
@@ -140,7 +142,7 @@ struct ContentView: View {
                     .overlay(
                         VStack {
                             ActivityIndicatorView()
-                            Text("Loading...")
+                            Text("Generating AI image...")
                                 .foregroundColor(.white)
                                 .padding(.top, 8)
                         }

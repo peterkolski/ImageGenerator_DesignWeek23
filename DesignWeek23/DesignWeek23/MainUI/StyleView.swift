@@ -40,6 +40,7 @@ struct StyleView: View {
     var body: some View {
         VStack {
             Text("Style")
+                .foregroundColor(.white)
                 .font(.largeTitle)
                 .padding()
             
@@ -52,13 +53,17 @@ struct StyleView: View {
                         VStack {
                             Image(systemName: style.image)
                                 .font(.system(size: 80))
+                                .bold()
                                 .padding()
+                                .foregroundColor(.orange)
+                            //                                .overlay(LinearGradient(gradient: Gradient(colors: [.orange, .white]), startPoint: .topLeading, endPoint: .bottomTrailing))
                             
                             Text(style.title)
                                 .padding(7)
+                                .foregroundColor(.white)
                         }
                         .frame(maxWidth: .infinity)
-                        .background(Color(.systemGroupedBackground))
+                        .background(Color.clear)
                         .cornerRadius(10)
                         .overlay(
                             RoundedRectangle(cornerRadius: 10)
