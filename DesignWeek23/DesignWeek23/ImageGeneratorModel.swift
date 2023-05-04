@@ -66,6 +66,11 @@ class ImageGeneratorModel: ObservableObject {
             ]
         ]
         
+        DispatchQueue.main.async {
+            self.isLoading = true
+        }
+        print("Loading image")
+        
         guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else {
             completion(.failure(NSError(domain: "generateImage", code: 2, userInfo: [NSLocalizedDescriptionKey: "Invalid request parameters"])))
             return
@@ -85,12 +90,13 @@ class ImageGeneratorModel: ObservableObject {
             }
             
             // Debugging: print raw data
-            print("Raw data:")
-            print(data)
+//            print("Raw data:")
+//            print(data)
             
             // Parse JSON response
             guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
                 completion(.failure(NSError(domain: "generateImage", code: 4, userInfo: [NSLocalizedDescriptionKey: "Invalid JSON response"])))
+                self.isLoading = false
                 return
             }
             
@@ -99,16 +105,18 @@ class ImageGeneratorModel: ObservableObject {
                   let imageDataString = artifacts.first?["base64"] as? String,
                   let imageData = Data(base64Encoded: imageDataString) else {
                 completion(.failure(NSError(domain: "generateImage", code: 5, userInfo: [NSLocalizedDescriptionKey: "Invalid image data"])))
+                self.isLoading = false
                 return
             }
             
             // Debugging: print decoded data
-            print("Decoded data:")
-            print(imageData)
+//            print("Decoded data:")
+//            print(imageData)
             
             // Convert to UIImage
             guard let image = UIImage(data: imageData) else {
                 completion(.failure(NSError(domain: "generateImage", code: 6, userInfo: [NSLocalizedDescriptionKey: "Invalid image data"])))
+                self.isLoading = false
                 return
             }
             
@@ -116,6 +124,11 @@ class ImageGeneratorModel: ObservableObject {
             if let lastText = self.lastText {
                 self.saveToICloud(folderName: folderName, text: lastText, image: image)
             }
+            
+            DispatchQueue.main.async {
+                self.isLoading = false // Add this line after the request is completed
+            }
+            print("Loading image completed")
             
             completion(.success(image))
         }.resume()

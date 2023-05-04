@@ -14,6 +14,7 @@
 		DB9CBFE129F2CE8600C83111 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB9CBFE029F2CE8600C83111 /* Assets.xcassets */; };
 		DB9CBFE429F2CE8600C83111 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB9CBFE329F2CE8600C83111 /* Preview Assets.xcassets */; };
 		DB9CBFEB29F2DFEA00C83111 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9CBFEA29F2DFEA00C83111 /* Constants.swift */; };
+		DBDC20262A0408E100B31A86 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDC20252A0408E100B31A86 /* ActivityIndicatorView.swift */; };
 		DBE4E54429F2FECE0004BD4A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE4E54329F2FECE0004BD4A /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +30,7 @@
 		DB9CBFEC29F2E11D00C83111 /* REST API Play.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "REST API Play.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DBDC20232A03E68800B31A86 /* DesignWeek23.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DesignWeek23.entitlements; sourceTree = "<group>"; };
 		DBDC20242A03EC0D00B31A86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		DBDC20252A0408E100B31A86 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		DBE4E54329F2FECE0004BD4A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -48,6 +50,7 @@
 			children = (
 				DB2C01EF29FD7D5200BD826D /* StyleView.swift */,
 				DB2C01F129FD7FAE00BD826D /* InfoView.swift */,
+				DBDC20252A0408E100B31A86 /* ActivityIndicatorView.swift */,
 			);
 			path = MainUI;
 			sourceTree = "<group>";
@@ -169,6 +172,7 @@
 				DB9CBFEB29F2DFEA00C83111 /* Constants.swift in Sources */,
 				DB2C01F229FD7FAE00BD826D /* InfoView.swift in Sources */,
 				DB2C01EE29FD70DA00BD826D /* ImageGeneratorModel.swift in Sources */,
+				DBDC20262A0408E100B31A86 /* ActivityIndicatorView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

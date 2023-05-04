@@ -124,7 +124,27 @@ struct ContentView: View {
                         }
                     }
             }
-        }
+                // Gray full-screen overlay when loading
+                if viewModel.isLoading {
+                    Color.gray.opacity(0.5)
+                        .edgesIgnoringSafeArea(.all)
+                }
+                
+                // Loading overlay
+                if viewModel.isLoading {
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(Color.black.opacity(0.7))
+                        .frame(width: 120, height: 120)
+                        .overlay(
+                            VStack {
+                                ActivityIndicatorView()
+                                Text("Loading...")
+                                    .foregroundColor(.white)
+                                    .padding(.top, 8)
+                            }
+                        )
+                }
+        }.edgesIgnoringSafeArea(.all)
     }
 }
 
