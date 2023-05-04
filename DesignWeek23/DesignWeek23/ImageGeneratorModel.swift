@@ -7,6 +7,9 @@
 
 import Foundation
 import SwiftUI
+import UIKit
+import CloudKit
+
 
 class ImageGeneratorModel: ObservableObject {
     @Published var text = ""
@@ -16,7 +19,20 @@ class ImageGeneratorModel: ObservableObject {
     @Published var errorMessage: String? = nil
     @Published var isLoading = false
     
-    func generateImage(completion: @escaping (Result<UIImage, Error>) -> Void) {
+    init() {
+        checkICloudAvailability()
+    }
+    
+    func checkICloudAvailability() {
+        guard FileManager.default.url(forUbiquityContainerIdentifier: nil) != nil else {
+            print("ERROR: iCloud Drive is not available.")
+            return
+        }
+        
+        print("iCloud Drive is available.")
+    }
+    
+    func generateImage(folderName: String, completion: @escaping (Result<UIImage, Error>) -> Void) {
         guard let apiKey = Constants.apiKey else {
             completion(.failure(NSError(domain: "generateImage", code: 0, userInfo: [NSLocalizedDescriptionKey: "API key not set"])))
             return
@@ -94,7 +110,62 @@ class ImageGeneratorModel: ObservableObject {
                 return
             }
             
+            // Save lastText and image to iCloud
+            if let lastText = self.lastText {
+                self.saveToICloud(folderName: folderName, text: lastText, image: image)
+            }
+            
             completion(.success(image))
         }.resume()
     }
+    
+    func saveToICloud(folderName: String, text: String, image: UIImage) {
+        // Get the URL for the iCloud Drive Documents folder
+        guard let iCloudDocumentsURL = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appendingPathComponent("Documents") else {
+            print("iCloud Drive is not available.")
+            return
+        }
+        
+        // Create a folder in the iCloud Drive Documents folder with the specified folder name
+        let folderURL = iCloudDocumentsURL.appendingPathComponent(folderName)
+        do {
+            try FileManager.default.createDirectory(at: folderURL, withIntermediateDirectories: true, attributes: nil)
+        } catch {
+            print("Error creating folder in iCloud Drive: \(error)")
+            return
+        }
+        
+        // Generate a unique filename with the current date and time
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd-HH-mm-ss"
+        let dateString = dateFormatter.string(from: Date())
+        let uniqueID = UUID().uuidString
+        let fileName = "\(dateString)-\(uniqueID)"
+        
+        // Save the text file
+        let textFileURL = folderURL.appendingPathComponent(fileName).appendingPathExtension("txt")
+        do {
+            try text.write(to: textFileURL, atomically: true, encoding: .utf8)
+            print("Text file saved to iCloud Drive: \(textFileURL)")
+        } catch {
+            print("Error saving text file to iCloud Drive: \(error)")
+            return
+        }
+        
+        // Save the image file
+        let imageFileURL = folderURL.appendingPathComponent(fileName).appendingPathExtension("jpg")
+        if let imageData = image.jpegData(compressionQuality: 1.0) {
+            do {
+                try imageData.write(to: imageFileURL)
+                print("Image file saved to iCloud Drive: \(imageFileURL)")
+            } catch {
+                print("Error saving image file to iCloud Drive: \(error)")
+                return
+            }
+        } else {
+            print("Error converting UIImage to JPEG data.")
+            return
+        }
+    }
+
 }

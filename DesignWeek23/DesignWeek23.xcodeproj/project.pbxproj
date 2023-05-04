@@ -27,6 +27,8 @@
 		DB9CBFE329F2CE8600C83111 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DB9CBFEA29F2DFEA00C83111 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DB9CBFEC29F2E11D00C83111 /* REST API Play.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "REST API Play.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		DBDC20232A03E68800B31A86 /* DesignWeek23.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DesignWeek23.entitlements; sourceTree = "<group>"; };
+		DBDC20242A03EC0D00B31A86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DBE4E54329F2FECE0004BD4A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -69,6 +71,8 @@
 		DB9CBFDB29F2CE8500C83111 /* DesignWeek23 */ = {
 			isa = PBXGroup;
 			children = (
+				DBDC20242A03EC0D00B31A86 /* Info.plist */,
+				DBDC20232A03E68800B31A86 /* DesignWeek23.entitlements */,
 				DB9CBFEC29F2E11D00C83111 /* REST API Play.playground */,
 				DB9CBFDC29F2CE8500C83111 /* DesignWeek23App.swift */,
 				DBE4E54329F2FECE0004BD4A /* ContentView.swift */,
@@ -290,12 +294,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = DesignWeek23/DesignWeek23.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"DesignWeek23/Preview Content\"";
 				DEVELOPMENT_TEAM = 73N26DTA23;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DesignWeek23/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -319,12 +325,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = DesignWeek23/DesignWeek23.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"DesignWeek23/Preview Content\"";
 				DEVELOPMENT_TEAM = 73N26DTA23;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DesignWeek23/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

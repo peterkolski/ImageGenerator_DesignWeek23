@@ -4,6 +4,7 @@ struct ContentView: View {
     @State private var isFullScreen = false
     @State private var showInfoView = false
     @StateObject var viewModel = ImageGeneratorModel()
+    private var folderName : String = "DesignWeek23 App Output"
     
     var body: some View {
             ZStack{
@@ -54,7 +55,7 @@ struct ContentView: View {
                                 Spacer()
                                 // Button to generate the image
                                 Button("Generate image") {
-                                    viewModel.generateImage { result in
+                                    viewModel.generateImage(folderName: folderName) { result in
                                         switch result {
                                         case .success(let image):
                                             viewModel.image = image
