@@ -8,6 +8,8 @@ struct ContentView: View {
     
     var body: some View {
             ZStack{
+                Color.gray
+                    .edgesIgnoringSafeArea(.all)
                 if isFullScreen{
                     Color.black
                         .opacity(isFullScreen ? 1 : 0)
@@ -145,6 +147,12 @@ struct ContentView: View {
                         )
                 }
         }.edgesIgnoringSafeArea(.all)
+            .gesture(
+                TapGesture()
+                    .onEnded { _ in
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                    }
+            )
     }
 }
 
