@@ -20,6 +20,8 @@
 		DBFC3A702A07C4050030A0EA /* ScreensaverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC3A6F2A07C4050030A0EA /* ScreensaverView.swift */; };
 		DBFC3A732A07C4C50030A0EA /* ScreensaverTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC3A722A07C4C50030A0EA /* ScreensaverTimer.swift */; };
 		DBFC3A752A07C4FC0030A0EA /* ContentViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC3A742A07C4FC0030A0EA /* ContentViewTests.swift */; };
+		DBFC3A772A07CE4E0030A0EA /* OnboardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC3A762A07CE4E0030A0EA /* OnboardingPage.swift */; };
+		DBFC3A7A2A07CEA50030A0EA /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC3A792A07CEA50030A0EA /* OnboardingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		DBFC3A6F2A07C4050030A0EA /* ScreensaverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreensaverView.swift; sourceTree = "<group>"; };
 		DBFC3A722A07C4C50030A0EA /* ScreensaverTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreensaverTimer.swift; sourceTree = "<group>"; };
 		DBFC3A742A07C4FC0030A0EA /* ContentViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewTests.swift; sourceTree = "<group>"; };
+		DBFC3A762A07CE4E0030A0EA /* OnboardingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPage.swift; sourceTree = "<group>"; };
+		DBFC3A792A07CEA50030A0EA /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +92,7 @@
 				DB9CBFDC29F2CE8500C83111 /* DesignWeek23App.swift */,
 				DBE4E54329F2FECE0004BD4A /* ContentView.swift */,
 				DBFC3A742A07C4FC0030A0EA /* ContentViewTests.swift */,
+				DBFC3A782A07CE980030A0EA /* Onboarding */,
 				DBFC3A6D2A041C980030A0EA /* MyTextFieldStyle.swift */,
 				DB2C01ED29FD70DA00BD826D /* ImageGeneratorModel.swift */,
 				DBFC3A712A07C4AF0030A0EA /* ScreenSaver */,
@@ -114,6 +119,15 @@
 				DBFC3A722A07C4C50030A0EA /* ScreensaverTimer.swift */,
 			);
 			path = ScreenSaver;
+			sourceTree = "<group>";
+		};
+		DBFC3A782A07CE980030A0EA /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				DBFC3A762A07CE4E0030A0EA /* OnboardingPage.swift */,
+				DBFC3A792A07CEA50030A0EA /* OnboardingView.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,6 +211,8 @@
 				DB2C01EE29FD70DA00BD826D /* ImageGeneratorModel.swift in Sources */,
 				DBDC20262A0408E100B31A86 /* ActivityIndicatorView.swift in Sources */,
 				DBFC3A702A07C4050030A0EA /* ScreensaverView.swift in Sources */,
+				DBFC3A7A2A07CEA50030A0EA /* OnboardingView.swift in Sources */,
+				DBFC3A772A07CE4E0030A0EA /* OnboardingPage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,41 +8,37 @@
 import SwiftUI
 
 struct ContentViewTests: View {
-    @StateObject private var screensaverTimer = ScreensaverTimer(interval: 2) {
-        print("Screensaver timeout")
-    }
-    @State private var showScreensaver = false
+    @State private var showOnboarding = false
 
     var body: some View {
         ZStack {
-            // Your main content here
-            Color.blue
+            Color.yellow
                 .edgesIgnoringSafeArea(.all)
-            Image(systemName: "scribble.variable")
-                .font(.system(size: 80))
-                .padding(.bottom, 20)
 
-            if showScreensaver {
-                ScreensaverView()
-                    .transition(.opacity)
-                    .onTapGesture {
-                        withAnimation {
-                            showScreensaver = false
-                        }
-                        screensaverTimer.resetTimer()
+            VStack {
+                Spacer()
+
+                Button(action: {
+                    withAnimation {
+                        showOnboarding = true
                     }
+                }) {
+                    Image(systemName: "info.circle")
+                        .font(.system(size: 40))
+                        .foregroundColor(.blue)
+                }
+
+                Spacer()
             }
-        }
-        .onReceive(screensaverTimer.$isActive) { isActive in
-            withAnimation {
-                showScreensaver = isActive
+
+            if showOnboarding {
+                OnboardingView(isPresented: $showOnboarding)
+                    .transition(.opacity)
             }
-        }
-        .onAppear {
-            screensaverTimer.resetTimer()
         }
     }
 }
+
 
 
 struct ContentViewTests_Previews: PreviewProvider {
