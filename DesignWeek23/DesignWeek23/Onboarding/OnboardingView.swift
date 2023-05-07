@@ -19,12 +19,15 @@ struct OnboardingView: View {
 
     var body: some View {
         ZStack {
+            // Set the background color to white and ignore safe area
+            Color.white
+                .ignoresSafeArea()
+            
             VStack {
                 Spacer()
 
                 OnboardingPageView(page: pages[currentPageIndex])
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(Color.white)
                     .edgesIgnoringSafeArea(.all)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
 
