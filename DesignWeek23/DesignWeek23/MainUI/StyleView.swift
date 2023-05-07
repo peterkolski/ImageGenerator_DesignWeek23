@@ -8,15 +8,23 @@
 import SwiftUI
 
 struct Style: Identifiable, Equatable {
-    let id = UUID()
+    let id: String // Change the type of id to String
     let image: String
     let title: String
     let promptStyleText: String
+
+    init(image: String, title: String, promptStyleText: String) {
+        self.id = title // Assign the title as the id
+        self.image = image
+        self.title = title
+        self.promptStyleText = promptStyleText
+    }
     
     static func == (lhs: Style, rhs: Style) -> Bool {
         lhs.id == rhs.id
     }
 }
+
 
 struct ParentView: View {
     @StateObject var viewModel = ImageGeneratorModel()
@@ -38,35 +46,41 @@ struct StyleView: View {
     @Binding var promtAddition: String
     
     var body: some View {
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 150, maximum: 400))], spacing: 10) {
+            ForEach(styles) { style in
+                Button(action: {
+                    selectedStyle = style
+                    promtAddition = style.promptStyleText
+                    print("Style chosen: \(String(describing: selectedStyle?.title))")
+                }) {
+                    VStack {
+                        Image(systemName: style.image)
+                            .font(.system(size: 80))
+                            .bold()
+                            .foregroundColor(.orange)
 
-            
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 150, maximum: 400))], spacing: 10) {
-                ForEach(styles) { style in
-                    Button(action: {
-                        selectedStyle = style
-                        promtAddition = style.promptStyleText
-                    }) {
-                        VStack {
-                            Image(systemName: style.image)
-                                .font(.system(size: 80))
-                                .bold()
-//                                .padding()
-                                .foregroundColor(.orange)
-                            //                                .overlay(LinearGradient(gradient: Gradient(colors: [.orange, .white]), startPoint: .topLeading, endPoint: .bottomTrailing))
-                            
+                        HStack { // Add an HStack here
+                            if style == selectedStyle {
+                                Image(systemName: "checkmark.square") // Display a checkmark box if the style is selected
+                                    .foregroundColor(.orange)
+                            } else {
+                                Image(systemName: "square") // Display an empty box if the style is not selected
+                                    .foregroundColor(.white)
+                            }
+
                             Text(style.title)
-//                                .padding(7)
                                 .foregroundColor(.white)
                         }
-                        .frame(maxWidth: .infinity)
-                        .background(Color.clear)
-                        .cornerRadius(10)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(style == selectedStyle ? Color.blue : Color.clear, lineWidth: 6)
-                        )
                     }
+                    .frame(maxWidth: .infinity)
+                    .background(Color.clear)
+                    .cornerRadius(10)
+//                    .overlay(
+//                        RoundedRectangle(cornerRadius: 10)
+//                            .stroke(style == selectedStyle ? Color.blue : Color.clear, lineWidth: 6)
+//                    )
                 }
+            }
         }
     }
 }

@@ -14,7 +14,7 @@ struct ContentView: View {
         ZStack{
             Color(red: 45/255, green: 48/255, blue: 58/255)
                 .edgesIgnoringSafeArea(.all)
-                
+            
             if isFullScreen{
                 Color.black
                     .opacity(isFullScreen ? 1 : 0)
@@ -31,25 +31,32 @@ struct ContentView: View {
                         }
                     }
             }
+                        VStack{
+            if !isFullScreen{
+                VStack {
+                    HStack {
+                        Image(systemName: "apple.logo")
+                            .font(.largeTitle)
+                            .foregroundColor(Color.white)
+                        Spacer()
+                        Button(action: {
+                            withAnimation {
+                                showOnboarding = true
+                            }
+                        }) {
+                            Image(systemName: "info.circle")
+                                .font(.system(size: 40))
+                                .foregroundColor(.blue)
+                        }
+                    }
+                    .padding([.leading, .trailing], 40)
+                    .padding(10)
+                }
+            }
             
             GeometryReader { geometry in
                 HStack {
                     VStack{
-                        VStack {
-                            HStack {
-                                Spacer()
-                                
-                                Button(action: {
-                                    withAnimation {
-                                        showOnboarding = true
-                                    }
-                                }) {
-                                    Image(systemName: "info.circle")
-                                        .font(.system(size: 40))
-                                        .foregroundColor(.blue)
-                                }
-                            }
-                        }
                         if !isFullScreen{
                             // Text input field
                             HStack {
@@ -63,7 +70,7 @@ struct ContentView: View {
                                 .modifier(MyTextFieldStyle())
                                 .lineLimit(4, reservesSpace: true)
                                 .padding([.leading, .trailing], 50)
-                                
+                            
                             
                             // Display any error message
                             if let errorMessage = viewModel.errorMessage {
@@ -87,7 +94,7 @@ struct ContentView: View {
                                 }
                             }
                             
-//                            Spacer()
+                            //                            Spacer()
                             // Button to generate the image
                             
                             HStack {
@@ -116,13 +123,20 @@ struct ContentView: View {
                                 .bold()
                                 .cornerRadius(25)
                                 .padding()
-                            .shadow(color: .black, radius: 5, x: 5, y: 5)
+                                .shadow(color: .black, radius: 5, x: 5, y: 5)
                                 Spacer()
                             }
                             .padding(10)
                         }
                     }
                     VStack{
+                        if !isFullScreen{
+                            HStack{
+                                Text("Click for full screen")
+                                    .foregroundColor(Color.white)
+                                Spacer()
+                            }
+                        }
                         if let lastText = viewModel.lastText{
                             // Display the generated image
                             if let image = viewModel.image {
@@ -142,11 +156,6 @@ struct ContentView: View {
                                     .edgesIgnoringSafeArea(isFullScreen ? .all : [])
                             }
                         } else{
-                            HStack{
-                                Text("Click for full screen")
-                                    .foregroundColor(Color.white)
-                                Spacer()
-                            }
                             Image(systemName: "photo.artframe" )
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
@@ -171,8 +180,8 @@ struct ContentView: View {
             
             // MARK: - Onboarding
             if showOnboarding {
-//                OnboardingView(isPresented: $showOnboarding)
-//                    .transition(.opacity)
+                //                OnboardingView(isPresented: $showOnboarding)
+                //                    .transition(.opacity)
             }
             
             // MARK: - Loading
@@ -208,6 +217,7 @@ struct ContentView: View {
                         screensaverTimer.resetTimer()
                     }
             }
+        }
         }
         .edgesIgnoringSafeArea(.all)
         .gesture(
