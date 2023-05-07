@@ -177,11 +177,11 @@ struct ContentView: View {
                         }
                     }
                 }
-                
+            }
                 // MARK: - Onboarding
                 if showOnboarding {
-                    //                OnboardingView(isPresented: $showOnboarding)
-                    //                    .transition(.opacity)
+                    OnboardingView(isPresented: $showOnboarding)
+                        .transition(.opacity)
                 }
                 
                 // MARK: - Loading
@@ -217,7 +217,6 @@ struct ContentView: View {
                             screensaverTimer.resetTimer()
                         }
                 }
-            }
         }
         .edgesIgnoringSafeArea(.all)
         .gesture(
