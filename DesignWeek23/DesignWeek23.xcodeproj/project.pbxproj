@@ -60,6 +60,7 @@
 		DB2C01EC29FD6A1900BD826D /* MainUI */ = {
 			isa = PBXGroup;
 			children = (
+				DBFC3A6D2A041C980030A0EA /* MyTextFieldStyle.swift */,
 				DB2C01EF29FD7D5200BD826D /* StyleView.swift */,
 				DB2C01F129FD7FAE00BD826D /* InfoView.swift */,
 				DBDC20252A0408E100B31A86 /* ActivityIndicatorView.swift */,
@@ -92,9 +93,8 @@
 				DB9CBFDC29F2CE8500C83111 /* DesignWeek23App.swift */,
 				DBE4E54329F2FECE0004BD4A /* ContentView.swift */,
 				DBFC3A742A07C4FC0030A0EA /* ContentViewTests.swift */,
-				DBFC3A782A07CE980030A0EA /* Onboarding */,
-				DBFC3A6D2A041C980030A0EA /* MyTextFieldStyle.swift */,
 				DB2C01ED29FD70DA00BD826D /* ImageGeneratorModel.swift */,
+				DBFC3A782A07CE980030A0EA /* Onboarding */,
 				DBFC3A712A07C4AF0030A0EA /* ScreenSaver */,
 				DB2C01EC29FD6A1900BD826D /* MainUI */,
 				DB9CBFEA29F2DFEA00C83111 /* Constants.swift */,
