@@ -5,7 +5,7 @@ struct ContentView: View {
     @State private var showOnboarding = false
     @StateObject var viewModel = ImageGeneratorModel()
     private var folderName : String = "DesignWeek23 App Output"
-    @StateObject private var screensaverTimer = ScreensaverTimer(interval: 15) {
+    @StateObject private var screensaverTimer = ScreensaverTimer(interval: 4) {
         print("Screensaver timeout")
     }
     @State private var showScreensaver = false
@@ -191,9 +191,15 @@ struct ContentView: View {
                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
             }
         }
+        .onChange(of: screensaverTimer.interactionsCount) { _ in
+            screensaverTimer.resetTimer()
+        }
         .onAppear {
             screensaverTimer.resetTimer()
         }
+        .simultaneousGesture(TapGesture().onEnded {
+            screensaverTimer.userInteraction()
+        })
     }
 }
 

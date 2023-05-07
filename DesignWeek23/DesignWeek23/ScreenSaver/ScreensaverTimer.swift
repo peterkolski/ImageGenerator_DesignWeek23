@@ -4,12 +4,12 @@
 //
 //  Created by Peter Kolski on 07.05.23.
 //
-
 import Combine
 import SwiftUI
 
 class ScreensaverTimer: ObservableObject {
     @Published var isActive = false
+    @Published var interactionsCount: Int = 0
 
     private var timer: Timer?
     private let interval: TimeInterval
@@ -30,9 +30,14 @@ class ScreensaverTimer: ObservableObject {
             }
         }
     }
+    
+    func userInteraction() {
+        interactionsCount += 1
+        resetTimer()
+        print("Interaction: \(interactionsCount)")
+    }
 
     deinit {
         timer?.invalidate()
     }
 }
-
