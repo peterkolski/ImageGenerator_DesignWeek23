@@ -12,6 +12,7 @@ struct DesignWeek23App: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+//            ContentViewTests()
         }
     }
 }

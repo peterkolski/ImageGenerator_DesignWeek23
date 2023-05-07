@@ -5,6 +5,10 @@ struct ContentView: View {
     @State private var showInfoView = false
     @StateObject var viewModel = ImageGeneratorModel()
     private var folderName : String = "DesignWeek23 App Output"
+    @StateObject private var screensaverTimer = ScreensaverTimer(interval: 2) {
+        print("Screensaver timeout")
+    }
+    @State private var showScreensaver = false
     
     var body: some View {
         ZStack{
@@ -128,6 +132,8 @@ struct ContentView: View {
                     }
                 }
             }
+            
+            // MARK: - Loading overlay
             // Gray full-screen overlay when loading
             if viewModel.isLoading {
                 Color.gray.opacity(0.5)
@@ -148,15 +154,41 @@ struct ContentView: View {
                         }
                     )
             }
-        }.edgesIgnoringSafeArea(.all)
-            .gesture(
-                TapGesture()
-                    .onEnded { _ in
-                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+            
+            // MARK: - Screensaver
+            if showScreensaver {
+                ScreensaverView()
+                    .transition(.opacity)
+                    .onTapGesture {
+                        withAnimation {
+                            showScreensaver = false
+                        }
+                        screensaverTimer.resetTimer()
                     }
-            )
+            }
+        }
+        .edgesIgnoringSafeArea(.all)
+        .gesture(
+            TapGesture()
+                .onEnded { _ in
+                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                }
+        )
+        // --- Screensaver timer
+        .onReceive(screensaverTimer.$isActive) { isActive in
+            withAnimation {
+                showScreensaver = isActive
+                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+            }
+        }
+        .onAppear {
+            screensaverTimer.resetTimer()
+        }
     }
 }
+
+
+// MARK: - Preview
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
