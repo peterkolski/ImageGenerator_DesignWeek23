@@ -32,6 +32,7 @@ class ImageGeneratorModel: ObservableObject {
         print("iCloud Drive is available.")
     }
     
+    // MARK: - generateImage()
     func generateImage(folderName: String, completion: @escaping (Result<UIImage, Error>) -> Void) {
         guard let apiKey = Constants.apiKey else {
             completion(.failure(NSError(domain: "generateImage", code: 0, userInfo: [NSLocalizedDescriptionKey: "API key not set"])))
@@ -135,6 +136,7 @@ class ImageGeneratorModel: ObservableObject {
         }.resume()
     }
     
+    // MARK: - saveToICloud()
     func saveToICloud(folderName: String, text: String, image: UIImage) {
         // Get the URL for the iCloud Drive Documents folder
         guard let iCloudDocumentsURL = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appendingPathComponent("Documents") else {
@@ -144,19 +146,27 @@ class ImageGeneratorModel: ObservableObject {
         
         // Create a folder in the iCloud Drive Documents folder with the specified folder name
         let folderURL = iCloudDocumentsURL.appendingPathComponent(folderName)
-        do {
-            try FileManager.default.createDirectory(at: folderURL, withIntermediateDirectories: true, attributes: nil)
-        } catch {
-            print("Error creating folder in iCloud Drive: \(error)")
-            return
+        if !FileManager.default.fileExists(atPath: folderURL.path) {
+            do {
+                try FileManager.default.createDirectory(at: folderURL, withIntermediateDirectories: true, attributes: nil)
+                print("iCloud Drive folder generated under \( folderURL.path)")
+            } catch {
+                print("Error creating folder in iCloud Drive: \(error)")
+                return
+            }
         }
         
         // Generate a unique filename with the current date and time
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd-HH-mm-ss"
         let dateString = dateFormatter.string(from: Date())
-        let uniqueID = UUID().uuidString
-        let fileName = "\(dateString)-\(uniqueID)"
+
+        // Add the first 7 words of the text
+        let words = text.split(separator: " ").prefix(7)
+        let joinedWords = words.joined(separator: "_")
+
+        let fileName = "\(dateString)-\(joinedWords)"
+
         
         // Save the text file
         let textFileURL = folderURL.appendingPathComponent(fileName).appendingPathExtension("txt")
@@ -183,5 +193,5 @@ class ImageGeneratorModel: ObservableObject {
             return
         }
     }
-    
+
 }

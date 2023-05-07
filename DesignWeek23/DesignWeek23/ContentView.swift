@@ -4,7 +4,7 @@ struct ContentView: View {
     @State private var isFullScreen = false
     @State private var showOnboarding = false
     @StateObject var viewModel = ImageGeneratorModel()
-    private var folderName : String = "DesignWeek23 App Output"
+    private var folderName : String = "DesignWeekAppOutput"
     @StateObject private var screensaverTimer = ScreensaverTimer(interval: 4) {
         print("Screensaver timeout")
     }
