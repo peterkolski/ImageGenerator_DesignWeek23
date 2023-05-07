@@ -15,9 +15,6 @@ struct ContentViewTests: View {
             Color.yellow
                 .edgesIgnoringSafeArea(.all)
 
-            VStack {
-                Spacer()
-
                 Button(action: {
                     withAnimation {
                         showOnboarding = true
@@ -27,9 +24,6 @@ struct ContentViewTests: View {
                         .font(.system(size: 40))
                         .foregroundColor(.blue)
                 }
-
-                Spacer()
-            }
 
             if showOnboarding {
                 OnboardingView(isPresented: $showOnboarding)
