@@ -38,13 +38,9 @@ struct StyleView: View {
     @Binding var promtAddition: String
     
     var body: some View {
-        VStack {
-            Text("Style")
-                .foregroundColor(.white)
-                .font(.largeTitle)
-                .padding()
+
             
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 200, maximum: 400))], spacing: 20) {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 150, maximum: 400))], spacing: 10) {
                 ForEach(styles) { style in
                     Button(action: {
                         selectedStyle = style
@@ -54,12 +50,12 @@ struct StyleView: View {
                             Image(systemName: style.image)
                                 .font(.system(size: 80))
                                 .bold()
-                                .padding()
+//                                .padding()
                                 .foregroundColor(.orange)
                             //                                .overlay(LinearGradient(gradient: Gradient(colors: [.orange, .white]), startPoint: .topLeading, endPoint: .bottomTrailing))
                             
                             Text(style.title)
-                                .padding(7)
+//                                .padding(7)
                                 .foregroundColor(.white)
                         }
                         .frame(maxWidth: .infinity)
@@ -71,15 +67,20 @@ struct StyleView: View {
                         )
                     }
                 }
-            }
-            .padding()
         }
     }
 }
 
 struct StyleView_Previews: PreviewProvider {
     static var previews: some View {
-        ParentView()
+        ZStack {
+            Color.gray
+            HStack {
+                ParentView()
+                Spacer()
+                ParentView()
+            }
+        }
     }
 }
 

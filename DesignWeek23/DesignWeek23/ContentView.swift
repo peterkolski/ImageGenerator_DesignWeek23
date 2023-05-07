@@ -5,7 +5,7 @@ struct ContentView: View {
     @State private var showOnboarding = false
     @StateObject var viewModel = ImageGeneratorModel()
     private var folderName : String = "DesignWeekAppOutput"
-    @StateObject private var screensaverTimer = ScreensaverTimer(interval: 4) {
+    @StateObject private var screensaverTimer = ScreensaverTimer(interval: 30) {
         print("Screensaver timeout")
     }
     @State private var showScreensaver = false
@@ -52,8 +52,17 @@ struct ContentView: View {
                         }
                         if !isFullScreen{
                             // Text input field
-                            TextField("Enter text", text: $viewModel.text)
+                            HStack {
+                                Text("1.")
+                                    .modifier(RedTextStyle())
+                                Text("Type your vision")
+                                    .modifier(WhiteBigTextStyle())
+                                Spacer()
+                            }
+                            TextField("Enter text", text: $viewModel.text, axis: .vertical)
                                 .modifier(MyTextFieldStyle())
+                                .lineLimit(4, reservesSpace: true)
+                                .padding([.leading, .trailing], 50)
                                 
                             
                             // Display any error message
@@ -63,33 +72,54 @@ struct ContentView: View {
                                     .padding()
                             }
                             
-                            StyleView(promtAddition: $viewModel.promtAddition)
+                            VStack {
+                                HStack {
+                                    Text("2.")
+                                        .modifier(RedTextStyle())
+                                    Text("Choose Your Style")
+                                        .modifier(WhiteBigTextStyle())
+                                    Spacer()
+                                }
+                                HStack {
+                                    StyleView(promtAddition: $viewModel.promtAddition)
+                                        .padding([.leading, .trailing], 100)
+                                    Spacer()
+                                }
+                            }
                             
-                            Spacer()
+//                            Spacer()
                             // Button to generate the image
-                            Button("Generate image") {
-                                viewModel.generateImage(folderName: folderName) { result in
-                                    switch result {
-                                    case .success(let image):
-                                        DispatchQueue.main.async {
-                                            viewModel.image = image
-                                            viewModel.errorMessage = nil
-                                        }
-                                    case .failure(let error):
-                                        DispatchQueue.main.async {
-                                            viewModel.image = nil
-                                            viewModel.errorMessage = error.localizedDescription
+                            
+                            HStack {
+                                Text("3.")
+                                    .modifier(RedTextStyle())
+                                Button("Generate image") {
+                                    viewModel.generateImage(folderName: folderName) { result in
+                                        switch result {
+                                        case .success(let image):
+                                            DispatchQueue.main.async {
+                                                viewModel.image = image
+                                                viewModel.errorMessage = nil
+                                            }
+                                        case .failure(let error):
+                                            DispatchQueue.main.async {
+                                                viewModel.image = nil
+                                                viewModel.errorMessage = error.localizedDescription
+                                            }
                                         }
                                     }
                                 }
-                            }
-                            .padding()
-                            .background(LinearGradient(gradient: Gradient(colors: [Color.blue, Color.pink]), startPoint: .leading, endPoint: .trailing) )
-                            .foregroundColor(.white)
-                            .bold()
-                            .cornerRadius(25)
-                            .padding()
+                                .font(.largeTitle)
+                                .padding()
+                                .background(LinearGradient(gradient: Gradient(colors: [Color.blue, Color.pink]), startPoint: .leading, endPoint: .trailing) )
+                                .foregroundColor(.white)
+                                .bold()
+                                .cornerRadius(25)
+                                .padding()
                             .shadow(color: .black, radius: 5, x: 5, y: 5)
+                                Spacer()
+                            }
+                            .padding(10)
                         }
                     }
                     VStack{
@@ -112,19 +142,22 @@ struct ContentView: View {
                                     .edgesIgnoringSafeArea(isFullScreen ? .all : [])
                             }
                         } else{
+                            HStack{
+                                Text("Click for full screen")
+                                    .foregroundColor(Color.white)
+                                Spacer()
+                            }
                             Image(systemName: "photo.artframe" )
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: isFullScreen ? geometry.size.width : geometry.size.width * 0.5,
                                        height: isFullScreen ? geometry.size.height : geometry.size.height * 0.5)
                                 .foregroundColor(.white)
-                        
                         }
                         
                         if let lastText = viewModel.lastText{
                             Group{
-                                Text("Last Text: ")
-                                Text(lastText)
+                                Text("Last Text: \n\(lastText)")
                             }
                             .modifier(MyTextFieldStyle())
                         } else{
@@ -138,8 +171,8 @@ struct ContentView: View {
             
             // MARK: - Onboarding
             if showOnboarding {
-                OnboardingView(isPresented: $showOnboarding)
-                    .transition(.opacity)
+//                OnboardingView(isPresented: $showOnboarding)
+//                    .transition(.opacity)
             }
             
             // MARK: - Loading
@@ -209,6 +242,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .previewDevice(PreviewDevice(rawValue: "iPad Pro (11-inch)"))
+            .previewDevice(PreviewDevice(rawValue: "iPad Pro (11-inch) (4th generation)"))
     }
 }
