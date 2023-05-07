@@ -31,193 +31,193 @@ struct ContentView: View {
                         }
                     }
             }
-                        VStack{
-            if !isFullScreen{
-                VStack {
-                    HStack {
-                        Image(systemName: "apple.logo")
-                            .font(.largeTitle)
-                            .foregroundColor(Color.white)
-                        Spacer()
-                        Button(action: {
-                            withAnimation {
-                                showOnboarding = true
+            VStack{
+                if !isFullScreen{
+                    VStack {
+                        HStack {
+                            Image(systemName: "apple.logo")
+                                .font(.largeTitle)
+                                .foregroundColor(Color.white)
+                            Spacer()
+                            Button(action: {
+                                withAnimation {
+                                    showOnboarding = true
+                                }
+                            }) {
+                                Image(systemName: "info.circle")
+                                    .font(.system(size: 40))
+                                    .foregroundColor(.blue)
                             }
-                        }) {
-                            Image(systemName: "info.circle")
-                                .font(.system(size: 40))
-                                .foregroundColor(.blue)
                         }
+                        .padding([.leading, .trailing], 40)
+                        .padding(10)
                     }
-                    .padding([.leading, .trailing], 40)
-                    .padding(10)
                 }
-            }
-            
-            GeometryReader { geometry in
-                HStack {
-                    VStack{
-                        if !isFullScreen{
-                            // Text input field
-                            HStack {
-                                Text("1.")
-                                    .modifier(RedTextStyle())
-                                Text("Type your vision")
-                                    .modifier(WhiteBigTextStyle())
-                                Spacer()
-                            }
-                            TextField("Enter text", text: $viewModel.text, axis: .vertical)
-                                .modifier(MyTextFieldStyle())
-                                .lineLimit(4, reservesSpace: true)
-                                .padding([.leading, .trailing], 50)
-                            
-                            
-                            // Display any error message
-                            if let errorMessage = viewModel.errorMessage {
-                                Text(errorMessage)
-                                    .foregroundColor(.red)
-                                    .padding()
-                            }
-                            
-                            VStack {
+                
+                GeometryReader { geometry in
+                    HStack {
+                        VStack{
+                            if !isFullScreen{
+                                // Text input field
                                 HStack {
-                                    Text("2.")
+                                    Text("1.")
                                         .modifier(RedTextStyle())
-                                    Text("Choose Your Style")
+                                    Text("Type your vision")
                                         .modifier(WhiteBigTextStyle())
                                     Spacer()
                                 }
-                                HStack {
-                                    StyleView(promtAddition: $viewModel.promtAddition)
-                                        .padding([.leading, .trailing], 100)
-                                    Spacer()
+                                TextField("Enter text", text: $viewModel.text, axis: .vertical)
+                                    .modifier(MyTextFieldStyle())
+                                    .lineLimit(4, reservesSpace: true)
+                                    .padding([.leading, .trailing], 50)
+                                
+                                
+                                // Display any error message
+                                if let errorMessage = viewModel.errorMessage {
+                                    Text(errorMessage)
+                                        .foregroundColor(.red)
+                                        .padding()
                                 }
-                            }
-                            
-                            //                            Spacer()
-                            // Button to generate the image
-                            
-                            HStack {
-                                Text("3.")
-                                    .modifier(RedTextStyle())
-                                Button("Generate image") {
-                                    viewModel.generateImage(folderName: folderName) { result in
-                                        switch result {
-                                        case .success(let image):
-                                            DispatchQueue.main.async {
-                                                viewModel.image = image
-                                                viewModel.errorMessage = nil
-                                            }
-                                        case .failure(let error):
-                                            DispatchQueue.main.async {
-                                                viewModel.image = nil
-                                                viewModel.errorMessage = error.localizedDescription
+                                
+                                VStack {
+                                    HStack {
+                                        Text("2.")
+                                            .modifier(RedTextStyle())
+                                        Text("Choose Your Style")
+                                            .modifier(WhiteBigTextStyle())
+                                        Spacer()
+                                    }
+                                    HStack {
+                                        StyleView(promtAddition: $viewModel.promtAddition)
+                                            .padding([.leading, .trailing], 100)
+                                        Spacer()
+                                    }
+                                }
+                                
+                                //                            Spacer()
+                                // Button to generate the image
+                                
+                                HStack {
+                                    Text("3.")
+                                        .modifier(RedTextStyle())
+                                    Button("Generate image") {
+                                        viewModel.generateImage(folderName: folderName) { result in
+                                            switch result {
+                                            case .success(let image):
+                                                DispatchQueue.main.async {
+                                                    viewModel.image = image
+                                                    viewModel.errorMessage = nil
+                                                }
+                                            case .failure(let error):
+                                                DispatchQueue.main.async {
+                                                    viewModel.image = nil
+                                                    viewModel.errorMessage = error.localizedDescription
+                                                }
                                             }
                                         }
                                     }
+                                    .font(.largeTitle)
+                                    .padding()
+                                    .background(LinearGradient(gradient: Gradient(colors: [Color.blue, Color.pink]), startPoint: .leading, endPoint: .trailing) )
+                                    .foregroundColor(.white)
+                                    .bold()
+                                    .cornerRadius(25)
+                                    .padding()
+                                    .shadow(color: .black, radius: 5, x: 5, y: 5)
+                                    Spacer()
                                 }
-                                .font(.largeTitle)
-                                .padding()
-                                .background(LinearGradient(gradient: Gradient(colors: [Color.blue, Color.pink]), startPoint: .leading, endPoint: .trailing) )
-                                .foregroundColor(.white)
-                                .bold()
-                                .cornerRadius(25)
-                                .padding()
-                                .shadow(color: .black, radius: 5, x: 5, y: 5)
-                                Spacer()
-                            }
-                            .padding(10)
-                        }
-                    }
-                    VStack{
-                        if !isFullScreen{
-                            HStack{
-                                Text("Click for full screen")
-                                    .foregroundColor(Color.white)
-                                Spacer()
+                                .padding(10)
                             }
                         }
-                        if let lastText = viewModel.lastText{
-                            // Display the generated image
-                            if let image = viewModel.image {
-                                Image(uiImage: image)
+                        VStack{
+                            if !isFullScreen{
+                                HStack{
+                                    Text("Click for full screen")
+                                        .foregroundColor(Color.white)
+                                    Spacer()
+                                }
+                            }
+                            if let lastText = viewModel.lastText{
+                                // Display the generated image
+                                if let image = viewModel.image {
+                                    Image(uiImage: image)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: isFullScreen ? geometry.size.width : geometry.size.width * 0.5,
+                                               height: isFullScreen ? geometry.size.height : geometry.size.height * 0.5)
+                                    //                            .background(Color.black)
+                                        .cornerRadius(isFullScreen ? 0 : 10)
+                                        .shadow(color: .black, radius: 5, x: 5, y: 5)
+                                        .gesture(TapGesture().onEnded {
+                                            withAnimation(.easeInOut(duration: 0.3)) {
+                                                isFullScreen.toggle()
+                                            }
+                                        })
+                                        .edgesIgnoringSafeArea(isFullScreen ? .all : [])
+                                }
+                            } else{
+                                Image(systemName: "photo.artframe" )
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: isFullScreen ? geometry.size.width : geometry.size.width * 0.5,
                                            height: isFullScreen ? geometry.size.height : geometry.size.height * 0.5)
-                                //                            .background(Color.black)
-                                    .cornerRadius(isFullScreen ? 0 : 10)
-                                    .shadow(color: .black, radius: 5, x: 5, y: 5)
-                                    .gesture(TapGesture().onEnded {
-                                        withAnimation(.easeInOut(duration: 0.3)) {
-                                            isFullScreen.toggle()
-                                        }
-                                    })
-                                    .edgesIgnoringSafeArea(isFullScreen ? .all : [])
+                                    .foregroundColor(.white)
                             }
-                        } else{
-                            Image(systemName: "photo.artframe" )
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: isFullScreen ? geometry.size.width : geometry.size.width * 0.5,
-                                       height: isFullScreen ? geometry.size.height : geometry.size.height * 0.5)
-                                .foregroundColor(.white)
-                        }
-                        
-                        if let lastText = viewModel.lastText{
-                            Group{
-                                Text("Last Text: \n\(lastText)")
-                            }
-                            .modifier(MyTextFieldStyle())
-                        } else{
-                            Text("No Text Entered yet")
+                            
+                            if let lastText = viewModel.lastText{
+                                Group{
+                                    Text("Last Text: \n\(lastText)")
+                                }
                                 .modifier(MyTextFieldStyle())
+                            } else{
+                                Text("No Text Entered yet")
+                                    .modifier(MyTextFieldStyle())
+                            }
+                            
                         }
-                        
                     }
                 }
-            }
-            
-            // MARK: - Onboarding
-            if showOnboarding {
-                //                OnboardingView(isPresented: $showOnboarding)
-                //                    .transition(.opacity)
-            }
-            
-            // MARK: - Loading
-            // Gray full-screen overlay when loading
-            if viewModel.isLoading {
-                Color.gray.opacity(0.5)
-                    .edgesIgnoringSafeArea(.all)
-            }
-            
-            // Loading overlay
-            if viewModel.isLoading {
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(Color.black.opacity(0.7))
-                    .frame(width: 120, height: 120)
-                    .overlay(
-                        VStack {
-                            ActivityIndicatorView()
-                            Text("Generating AI image...")
-                                .foregroundColor(.white)
-                                .padding(.top, 8)
+                
+                // MARK: - Onboarding
+                if showOnboarding {
+                    //                OnboardingView(isPresented: $showOnboarding)
+                    //                    .transition(.opacity)
+                }
+                
+                // MARK: - Loading
+                // Gray full-screen overlay when loading
+                if viewModel.isLoading {
+                    Color.gray.opacity(0.5)
+                        .edgesIgnoringSafeArea(.all)
+                }
+                
+                // Loading overlay
+                if viewModel.isLoading {
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(Color.black.opacity(0.7))
+                        .frame(width: 120, height: 120)
+                        .overlay(
+                            VStack {
+                                ActivityIndicatorView()
+                                Text("Generating AI image...")
+                                    .foregroundColor(.white)
+                                    .padding(.top, 8)
+                            }
+                        )
+                }
+                
+                // MARK: - Screensaver
+                if showScreensaver {
+                    ScreensaverView()
+                        .transition(.opacity)
+                        .onTapGesture {
+                            withAnimation {
+                                showScreensaver = false
+                            }
+                            screensaverTimer.resetTimer()
                         }
-                    )
+                }
             }
-            
-            // MARK: - Screensaver
-            if showScreensaver {
-                ScreensaverView()
-                    .transition(.opacity)
-                    .onTapGesture {
-                        withAnimation {
-                            showScreensaver = false
-                        }
-                        screensaverTimer.resetTimer()
-                    }
-            }
-        }
         }
         .edgesIgnoringSafeArea(.all)
         .gesture(
