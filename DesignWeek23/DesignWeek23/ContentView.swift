@@ -2,10 +2,10 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var isFullScreen = false
-    @State private var showInfoView = false
+    @State private var showOnboarding = false
     @StateObject var viewModel = ImageGeneratorModel()
     private var folderName : String = "DesignWeek23 App Output"
-    @StateObject private var screensaverTimer = ScreensaverTimer(interval: 2) {
+    @StateObject private var screensaverTimer = ScreensaverTimer(interval: 15) {
         print("Screensaver timeout")
     }
     @State private var showScreensaver = false
@@ -38,12 +38,15 @@ struct ContentView: View {
                         VStack {
                             HStack {
                                 Spacer()
+                                
                                 Button(action: {
-                                    showInfoView.toggle()
+                                    withAnimation {
+                                        showOnboarding = true
+                                    }
                                 }) {
                                     Image(systemName: "info.circle")
                                         .font(.system(size: 40))
-                                        .padding()
+                                        .foregroundColor(.blue)
                                 }
                             }
                         }
@@ -133,7 +136,13 @@ struct ContentView: View {
                 }
             }
             
-            // MARK: - Loading overlay
+            // MARK: - Onboarding
+            if showOnboarding {
+                OnboardingView(isPresented: $showOnboarding)
+                    .transition(.opacity)
+            }
+            
+            // MARK: - Loading
             // Gray full-screen overlay when loading
             if viewModel.isLoading {
                 Color.gray.opacity(0.5)
@@ -178,6 +187,7 @@ struct ContentView: View {
         .onReceive(screensaverTimer.$isActive) { isActive in
             withAnimation {
                 showScreensaver = isActive
+                showOnboarding = true
                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
             }
         }
