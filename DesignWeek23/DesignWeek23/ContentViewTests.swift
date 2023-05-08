@@ -8,23 +8,28 @@
 import SwiftUI
 
 struct ContentViewTests: View {
+    // MARK: - Properties
     @State private var showOnboarding = false
 
+    // MARK: - Body
     var body: some View {
         ZStack {
+            // MARK: - Background
             Color.yellow
                 .edgesIgnoringSafeArea(.all)
 
-                Button(action: {
-                    withAnimation {
-                        showOnboarding = true
-                    }
-                }) {
-                    Image(systemName: "info.circle")
-                        .font(.system(size: 40))
-                        .foregroundColor(.blue)
+            // MARK: - Button
+            Button(action: {
+                withAnimation {
+                    showOnboarding = true
                 }
+            }) {
+                Image(systemName: "info.circle")
+                    .font(.system(size: 40))
+                    .foregroundColor(.blue)
+            }
 
+            // MARK: - Onboarding View
             if showOnboarding {
                 OnboardingView(isPresented: $showOnboarding)
                     .transition(.opacity)
