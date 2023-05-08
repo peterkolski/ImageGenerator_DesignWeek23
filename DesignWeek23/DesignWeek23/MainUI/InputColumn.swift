@@ -85,33 +85,39 @@ struct GenerateButtonSection: View {
         HStack {
             Text("3.")
                 .modifier(RedTextStyle())
-            Button("Generate image") {
-                viewModel.generateImage(folderName: folderName) { result in
-                    switch result {
-                    case .success(let image):
-                        DispatchQueue.main.async {
-                            viewModel.image = image
-                            viewModel.errorMessage = nil
-                        } 
-                    case .failure(let error):
-                        DispatchQueue.main.async {
-                            viewModel.image = nil
-                            viewModel.errorMessage = error.localizedDescription
-                        }
-                    }
-                }
-            }
-            .font(.largeTitle)
-            .padding()
-            .background(LinearGradient(gradient: Gradient(colors: [Color.blue, Color.pink]), startPoint: .leading, endPoint: .trailing))
-            .foregroundColor(.white)
-            .bold()
-            .cornerRadius(25)
-            .padding()
-            .shadow(color: .black, radius: 5, x: 5, y: 5)
+            generateButton
             Spacer()
         }
         .padding(10)
+    }
+}
+
+extension GenerateButtonSection {
+    var generateButton: some View {
+        Button("Generate image") {
+            viewModel.generateImage(folderName: folderName) { result in
+                switch result {
+                case .success(let image):
+                    DispatchQueue.main.async {
+                        viewModel.image = image
+                        viewModel.errorMessage = nil
+                    }
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        viewModel.image = nil
+                        viewModel.errorMessage = error.localizedDescription
+                    }
+                }
+            }
+        }
+        .font(.largeTitle)
+        .padding()
+        .background(LinearGradient(gradient: Gradient(colors: [Color.blue, Color.pink]), startPoint: .leading, endPoint: .trailing))
+        .foregroundColor(.white)
+        .bold()
+        .cornerRadius(25)
+        .padding()
+        .shadow(color: .black, radius: 5, x: 5, y: 5)
     }
 }
 
