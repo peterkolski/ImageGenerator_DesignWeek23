@@ -10,10 +10,13 @@
 		DB2C01EE29FD70DA00BD826D /* ImageGeneratorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2C01ED29FD70DA00BD826D /* ImageGeneratorModel.swift */; };
 		DB2C01F029FD7D5200BD826D /* StyleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2C01EF29FD7D5200BD826D /* StyleView.swift */; };
 		DB2C01F229FD7FAE00BD826D /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2C01F129FD7FAE00BD826D /* InfoView.swift */; };
+		DB51030F2A08FD45007E36E9 /* OutputColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB51030E2A08FD45007E36E9 /* OutputColumn.swift */; };
+		DB5103112A08FEF0007E36E9 /* InputColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5103102A08FEF0007E36E9 /* InputColumn.swift */; };
 		DB9CBFDD29F2CE8500C83111 /* DesignWeek23App.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9CBFDC29F2CE8500C83111 /* DesignWeek23App.swift */; };
 		DB9CBFE129F2CE8600C83111 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB9CBFE029F2CE8600C83111 /* Assets.xcassets */; };
 		DB9CBFE429F2CE8600C83111 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB9CBFE329F2CE8600C83111 /* Preview Assets.xcassets */; };
 		DB9CBFEB29F2DFEA00C83111 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9CBFEA29F2DFEA00C83111 /* Constants.swift */; };
+		DB9D004B2A08E864005C1C8F /* ContentViewRefactored.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9D004A2A08E864005C1C8F /* ContentViewRefactored.swift */; };
 		DBDC20262A0408E100B31A86 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDC20252A0408E100B31A86 /* ActivityIndicatorView.swift */; };
 		DBE4E54429F2FECE0004BD4A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE4E54329F2FECE0004BD4A /* ContentView.swift */; };
 		DBFC3A6E2A041C980030A0EA /* MyTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC3A6D2A041C980030A0EA /* MyTextFieldStyle.swift */; };
@@ -28,12 +31,15 @@
 		DB2C01ED29FD70DA00BD826D /* ImageGeneratorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGeneratorModel.swift; sourceTree = "<group>"; };
 		DB2C01EF29FD7D5200BD826D /* StyleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleView.swift; sourceTree = "<group>"; };
 		DB2C01F129FD7FAE00BD826D /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
+		DB51030E2A08FD45007E36E9 /* OutputColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputColumn.swift; sourceTree = "<group>"; };
+		DB5103102A08FEF0007E36E9 /* InputColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputColumn.swift; sourceTree = "<group>"; };
 		DB9CBFD929F2CE8500C83111 /* DesignWeek23.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DesignWeek23.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB9CBFDC29F2CE8500C83111 /* DesignWeek23App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignWeek23App.swift; sourceTree = "<group>"; };
 		DB9CBFE029F2CE8600C83111 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DB9CBFE329F2CE8600C83111 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DB9CBFEA29F2DFEA00C83111 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DB9CBFEC29F2E11D00C83111 /* REST API Play.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "REST API Play.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		DB9D004A2A08E864005C1C8F /* ContentViewRefactored.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewRefactored.swift; sourceTree = "<group>"; };
 		DBDC20232A03E68800B31A86 /* DesignWeek23.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DesignWeek23.entitlements; sourceTree = "<group>"; };
 		DBDC20242A03EC0D00B31A86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DBDC20252A0408E100B31A86 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
@@ -60,6 +66,8 @@
 		DB2C01EC29FD6A1900BD826D /* MainUI */ = {
 			isa = PBXGroup;
 			children = (
+				DB5103102A08FEF0007E36E9 /* InputColumn.swift */,
+				DB51030E2A08FD45007E36E9 /* OutputColumn.swift */,
 				DBFC3A6D2A041C980030A0EA /* MyTextFieldStyle.swift */,
 				DB2C01EF29FD7D5200BD826D /* StyleView.swift */,
 				DB2C01F129FD7FAE00BD826D /* InfoView.swift */,
@@ -93,6 +101,7 @@
 				DB9CBFDC29F2CE8500C83111 /* DesignWeek23App.swift */,
 				DBE4E54329F2FECE0004BD4A /* ContentView.swift */,
 				DBFC3A742A07C4FC0030A0EA /* ContentViewTests.swift */,
+				DB9D004A2A08E864005C1C8F /* ContentViewRefactored.swift */,
 				DB2C01ED29FD70DA00BD826D /* ImageGeneratorModel.swift */,
 				DBFC3A782A07CE980030A0EA /* Onboarding */,
 				DBFC3A712A07C4AF0030A0EA /* ScreenSaver */,
@@ -205,14 +214,17 @@
 				DBFC3A6E2A041C980030A0EA /* MyTextFieldStyle.swift in Sources */,
 				DB9CBFDD29F2CE8500C83111 /* DesignWeek23App.swift in Sources */,
 				DBFC3A732A07C4C50030A0EA /* ScreensaverTimer.swift in Sources */,
+				DB51030F2A08FD45007E36E9 /* OutputColumn.swift in Sources */,
 				DBE4E54429F2FECE0004BD4A /* ContentView.swift in Sources */,
 				DB9CBFEB29F2DFEA00C83111 /* Constants.swift in Sources */,
 				DB2C01F229FD7FAE00BD826D /* InfoView.swift in Sources */,
 				DB2C01EE29FD70DA00BD826D /* ImageGeneratorModel.swift in Sources */,
+				DB5103112A08FEF0007E36E9 /* InputColumn.swift in Sources */,
 				DBDC20262A0408E100B31A86 /* ActivityIndicatorView.swift in Sources */,
 				DBFC3A702A07C4050030A0EA /* ScreensaverView.swift in Sources */,
 				DBFC3A7A2A07CEA50030A0EA /* OnboardingView.swift in Sources */,
 				DBFC3A772A07CE4E0030A0EA /* OnboardingPage.swift in Sources */,
+				DB9D004B2A08E864005C1C8F /* ContentViewRefactored.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
