@@ -9,7 +9,7 @@ import SwiftUI
 
 // MARK: - Main View
 struct ContentViewRefactored: View {
-    @State private var isFullScreen = false
+    @State private var isImageFullScreen = false
     @State private var showOnboarding = false
     @StateObject var viewModel = ImageGeneratorModel()
     private var folderName: String = "DesignWeekAppOutput"
@@ -22,16 +22,16 @@ struct ContentViewRefactored: View {
         ZStack {
             BackgroundView()
             
-            if isFullScreen {
-                FullScreenOverlay(isFullScreen: $isFullScreen)
+            if isImageFullScreen {
+                FullScreenOverlay(isFullScreen: $isImageFullScreen)
             }
             
             VStack {
-                if !isFullScreen {
+                if !isImageFullScreen {
                     HeaderComponent(showOnboarding: $showOnboarding)
                 }
                 
-                MainContent(isFullScreen: $isFullScreen, viewModel: viewModel, folderName: folderName)
+                MainContent(isFullScreen: $isImageFullScreen, viewModel: viewModel, folderName: folderName)
             }
             
             if showOnboarding {
@@ -63,8 +63,9 @@ struct ContentViewRefactored: View {
         )
         .onReceive(screensaverTimer.$isActive) { isActive in
             withAnimation {
-                showScreensaver = isActive
+                showScreensaver = true
                 showOnboarding = true
+                isImageFullScreen = false
                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
             }
         }
