@@ -20,19 +20,6 @@ class ImageGeneratorModel: ObservableObject {
     @Published var errorMessage: String? = nil
     @Published var isLoading = false
     
-    init() {
-        checkICloudAvailability()
-    }
-    
-    func checkICloudAvailability() {
-        guard FileManager.default.url(forUbiquityContainerIdentifier: nil) != nil else {
-            print("ERROR: iCloud Drive is not available.")
-            return
-        }
-        
-        print("iCloud Drive is available.")
-    }
-    
     // MARK: - generateImage()
     func generateImage(folderName: String, completion: @escaping (Result<UIImage, Error>) -> Void) {
         guard let apiKey = Constants.apiKey else {
@@ -124,8 +111,12 @@ class ImageGeneratorModel: ObservableObject {
             }
             
             // Save lastText and image to iCloud
-            if let lastText = self.lastText {
-                self.saveToFolder(folderURL: self.folderURL, text: self.text, image: image)
+            // NOTE: lastText, because text was reset
+            if let lastText = self.lastText, let folder = self.folderURL {
+                self.saveToFolder(folderURL: folder, text: lastText, image: image)
+                print("NOTE: Saving to folder: \(folder)")
+            } else {
+                print("ERROR: Folder URL is not set.")
             }
             
             DispatchQueue.main.async {
@@ -144,14 +135,21 @@ class ImageGeneratorModel: ObservableObject {
             print("Folder URL is not provided.")
             return
         }
-        
+
+        // Start accessing the URL
+        let isAccessing = folderURL.startAccessingSecurityScopedResource()
+
         // Check if the folder exists at the provided URL
         if !FileManager.default.fileExists(atPath: folderURL.path) {
             print("The folder does not exist at the provided URL: \(folderURL.path)")
+            if isAccessing {
+                folderURL.stopAccessingSecurityScopedResource()
+            }
             return
         }
         
         let fileName = generateFileName(text: text)
+        print("NOTE: generated filename: \(fileName)")
 
         // Save the text file
         let textFileURL = folderURL.appendingPathComponent(fileName).appendingPathExtension("txt")
@@ -160,7 +158,6 @@ class ImageGeneratorModel: ObservableObject {
             print("Text file saved to the folder: \(textFileURL)")
         } catch {
             print("Error saving text file to the folder: \(error)")
-            return
         }
 
         // Save the image file
@@ -171,13 +168,17 @@ class ImageGeneratorModel: ObservableObject {
                 print("Image file saved to the folder: \(imageFileURL)")
             } catch {
                 print("Error saving image file to the folder: \(error)")
-                return
             }
         } else {
             print("Error converting UIImage to JPEG data.")
-            return
+        }
+
+        // Stop accessing the URL
+        if isAccessing {
+            folderURL.stopAccessingSecurityScopedResource()
         }
     }
+
     
     // function which generates the filename based on the current date and time and the first 7 words
     func generateFileName(text: String) -> String {
