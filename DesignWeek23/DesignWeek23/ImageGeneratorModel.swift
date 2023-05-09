@@ -158,7 +158,7 @@ class ImageGeneratorModel: ObservableObject {
         
         // Generate a unique filename with the current date and time
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd-HH-mm-ss"
+        dateFormatter.dateFormat = "yyyy-MM-dd-HH-mm"
         let dateString = dateFormatter.string(from: Date())
 
         // Add the first 7 words of the text
