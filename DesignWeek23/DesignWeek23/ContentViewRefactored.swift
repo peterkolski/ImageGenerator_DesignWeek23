@@ -99,7 +99,7 @@ struct ContentViewRefactored: View {
 
 struct BackgroundView: View {
     var body: some View {
-        Color(red: 45 / 255, green: 48 / 255, blue: 58 / 255)
+        Color("Background Full")
             .edgesIgnoringSafeArea(.all)
     }
 }
@@ -133,22 +133,24 @@ struct HeaderComponent: View {
     var body: some View {
         VStack {
             HStack {
-                Image(systemName: "apple.logo")
-                    .font(.largeTitle)
-                    .foregroundColor(Color.white)
+                Image("IconLogo")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 200, height: 200)
                 Spacer()
                 Button(action: {
                     withAnimation {
                         showOnboarding = true
                     }
                 }) {
-                    Image(systemName: "info.circle")
-                        .font(.system(size: 40))
-                        .foregroundColor(.blue)
+                    Image("IconQuestion")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 100, height: 200)
                 }
             }
             .padding([.leading, .trailing], 40)
-            .padding(10)
+//            .padding(10)
         }
     }
 }
