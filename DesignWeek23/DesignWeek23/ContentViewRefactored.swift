@@ -11,6 +11,7 @@ import SwiftUI
 struct ContentViewRefactored: View {
     @State private var isImageFullScreen = false
     @State private var showOnboarding = false
+    @State private var showPicker = false
     @StateObject var viewModel = ImageGeneratorModel()
     private var folderName: String = "DesignWeekAppOutput"
     @StateObject private var screensaverTimer = ScreensaverTimer(interval: 30) {
@@ -52,6 +53,19 @@ struct ContentViewRefactored: View {
                         }
                         screensaverTimer.resetTimer()
                     }
+            }
+            
+            if viewModel.folderURL == nil {
+                Button("Select Folder") {
+                    showPicker = true
+                }
+                .font(.largeTitle)
+                .padding(30)
+                .background(Color.red)
+                .cornerRadius(40)
+                .sheet(isPresented: $showPicker, content: {
+                    FolderPicker(selectedFolderURL: $viewModel.folderURL)
+                })
             }
         }
         .edgesIgnoringSafeArea(.all)

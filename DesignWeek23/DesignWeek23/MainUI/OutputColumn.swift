@@ -30,7 +30,6 @@ struct OutputColumn: View {
 
 struct GeneratedImageView: View {
     @Binding var isFullScreen: Bool
-    @State private var showPicker = false
     @ObservedObject var viewModel: ImageGeneratorModel
     
     var body: some View {
@@ -62,16 +61,6 @@ struct GeneratedImageView: View {
                         }
                     })
                     .edgesIgnoringSafeArea(isFullScreen ? .all : [])
-            }
-            if let url = viewModel.folderURL{
-                Text("Selected folder: \(url.absoluteString)")
-            } else {
-                Button("Select Folder") {
-                    showPicker = true
-                }
-                .sheet(isPresented: $showPicker, content: {
-                    FolderPicker(selectedFolderURL: $viewModel.folderURL)
-                })
             }
         }
     }
