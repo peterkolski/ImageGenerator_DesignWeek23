@@ -12,6 +12,7 @@ import CloudKit
 
 
 class ImageGeneratorModel: ObservableObject {
+    @Published var folderURL : URL?
     @Published var text = ""
     @Published var promtAddition = ""
     @Published var lastText : String? = nil
@@ -124,7 +125,7 @@ class ImageGeneratorModel: ObservableObject {
             
             // Save lastText and image to iCloud
             if let lastText = self.lastText {
-                self.saveToICloud(folderName: folderName, text: lastText, image: image)
+                self.saveToFolder(folderURL: self.folderURL, text: self.text, image: image)
             }
             
             DispatchQueue.main.async {
@@ -136,56 +137,40 @@ class ImageGeneratorModel: ObservableObject {
         }.resume()
     }
     
-    // MARK: - saveToICloud()
-    func saveToICloud(folderName: String, text: String, image: UIImage) {
-        // Get the URL for the iCloud Drive Documents folder
-        guard let iCloudDocumentsURL = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appendingPathComponent("Documents") else {
-            print("iCloud Drive is not available.")
+    // MARK: - saveToFolder()
+    func saveToFolder(folderURL: URL?, text: String, image: UIImage) {
+        // Check if folder URL is provided
+        guard let folderURL = folderURL else {
+            print("Folder URL is not provided.")
             return
         }
         
-        // Create a folder in the iCloud Drive Documents folder with the specified folder name
-        let folderURL = iCloudDocumentsURL.appendingPathComponent(folderName)
+        // Check if the folder exists at the provided URL
         if !FileManager.default.fileExists(atPath: folderURL.path) {
-            do {
-                try FileManager.default.createDirectory(at: folderURL, withIntermediateDirectories: true, attributes: nil)
-                print("iCloud Drive folder generated under \( folderURL.path)")
-            } catch {
-                print("Error creating folder in iCloud Drive: \(error)")
-                return
-            }
+            print("The folder does not exist at the provided URL: \(folderURL.path)")
+            return
         }
         
-        // Generate a unique filename with the current date and time
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd-HH-mm"
-        let dateString = dateFormatter.string(from: Date())
+        let fileName = generateFileName(text: text)
 
-        // Add the first 7 words of the text
-        let words = text.split(separator: " ").prefix(7)
-        let joinedWords = words.joined(separator: "_")
-
-        let fileName = "\(dateString)-\(joinedWords)"
-
-        
         // Save the text file
         let textFileURL = folderURL.appendingPathComponent(fileName).appendingPathExtension("txt")
         do {
             try text.write(to: textFileURL, atomically: true, encoding: .utf8)
-            print("Text file saved to iCloud Drive: \(textFileURL)")
+            print("Text file saved to the folder: \(textFileURL)")
         } catch {
-            print("Error saving text file to iCloud Drive: \(error)")
+            print("Error saving text file to the folder: \(error)")
             return
         }
-        
+
         // Save the image file
         let imageFileURL = folderURL.appendingPathComponent(fileName).appendingPathExtension("jpg")
         if let imageData = image.jpegData(compressionQuality: 1.0) {
             do {
                 try imageData.write(to: imageFileURL)
-                print("Image file saved to iCloud Drive: \(imageFileURL)")
+                print("Image file saved to the folder: \(imageFileURL)")
             } catch {
-                print("Error saving image file to iCloud Drive: \(error)")
+                print("Error saving image file to the folder: \(error)")
                 return
             }
         } else {
@@ -193,5 +178,21 @@ class ImageGeneratorModel: ObservableObject {
             return
         }
     }
-
+    
+    // function which generates the filename based on the current date and time and the first 7 words
+    func generateFileName(text: String) -> String {
+        // Generate a unique filename with the current date and time
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd-HH-mm"
+        let dateString = dateFormatter.string(from: Date())
+        
+        // Add the first 7 words of the text
+        let words = text.split(separator: " ").prefix(7)
+        let joinedWords = words.joined(separator: "_")
+        
+        let fileName = "\(dateString)-\(joinedWords)"
+        
+        return fileName
+    }
+    
 }

@@ -12,6 +12,7 @@
 		DB2C01F229FD7FAE00BD826D /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2C01F129FD7FAE00BD826D /* InfoView.swift */; };
 		DB51030F2A08FD45007E36E9 /* OutputColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB51030E2A08FD45007E36E9 /* OutputColumn.swift */; };
 		DB5103112A08FEF0007E36E9 /* InputColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5103102A08FEF0007E36E9 /* InputColumn.swift */; };
+		DB5103132A0A8F8E007E36E9 /* FolderPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5103122A0A8F8E007E36E9 /* FolderPicker.swift */; };
 		DB9CBFDD29F2CE8500C83111 /* DesignWeek23App.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9CBFDC29F2CE8500C83111 /* DesignWeek23App.swift */; };
 		DB9CBFE129F2CE8600C83111 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB9CBFE029F2CE8600C83111 /* Assets.xcassets */; };
 		DB9CBFE429F2CE8600C83111 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB9CBFE329F2CE8600C83111 /* Preview Assets.xcassets */; };
@@ -33,6 +34,7 @@
 		DB2C01F129FD7FAE00BD826D /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		DB51030E2A08FD45007E36E9 /* OutputColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputColumn.swift; sourceTree = "<group>"; };
 		DB5103102A08FEF0007E36E9 /* InputColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputColumn.swift; sourceTree = "<group>"; };
+		DB5103122A0A8F8E007E36E9 /* FolderPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FolderPicker.swift; path = SavingFiles/FolderPicker.swift; sourceTree = "<group>"; };
 		DB9CBFD929F2CE8500C83111 /* DesignWeek23.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DesignWeek23.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB9CBFDC29F2CE8500C83111 /* DesignWeek23App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignWeek23App.swift; sourceTree = "<group>"; };
 		DB9CBFE029F2CE8600C83111 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				DB9CBFDC29F2CE8500C83111 /* DesignWeek23App.swift */,
 				DBE4E54329F2FECE0004BD4A /* ContentView.swift */,
 				DBFC3A742A07C4FC0030A0EA /* ContentViewTests.swift */,
+				DB5103122A0A8F8E007E36E9 /* FolderPicker.swift */,
 				DB9D004A2A08E864005C1C8F /* ContentViewRefactored.swift */,
 				DB2C01ED29FD70DA00BD826D /* ImageGeneratorModel.swift */,
 				DBFC3A782A07CE980030A0EA /* Onboarding */,
@@ -225,6 +228,7 @@
 				DBFC3A7A2A07CEA50030A0EA /* OnboardingView.swift in Sources */,
 				DBFC3A772A07CE4E0030A0EA /* OnboardingPage.swift in Sources */,
 				DB9D004B2A08E864005C1C8F /* ContentViewRefactored.swift in Sources */,
+				DB5103132A0A8F8E007E36E9 /* FolderPicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
