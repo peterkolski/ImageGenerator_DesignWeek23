@@ -106,8 +106,8 @@ struct BackgroundView: View {
             .edgesIgnoringSafeArea(.all)
         RadialGradient(
           gradient: Gradient(colors: [
-              Color(red: 20.0 / 100, green: 22.0 / 100, blue: 27.0 / 100),
-              Color(red: 5.0 / 100, green: 6.0 / 100, blue: 10.0 / 100)
+            Color(red: 20.0 / 100, green: 22.0 / 100, blue: 27.0 / 100),
+            Color.black
           ]),
           center: .center,
           startRadius: 0,
