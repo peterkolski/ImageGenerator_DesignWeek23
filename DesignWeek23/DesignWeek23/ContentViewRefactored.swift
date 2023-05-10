@@ -26,11 +26,11 @@ struct ContentViewRefactored: View {
             if isImageFullScreen {
                 FullScreenOverlay(isFullScreen: $isImageFullScreen)
             }
-            
+            if !isImageFullScreen {
+                HeaderComponent(showOnboarding: $showOnboarding)
+            }
             VStack {
-                if !isImageFullScreen {
-                    HeaderComponent(showOnboarding: $showOnboarding)
-                }
+
                 
                 MainContent(isFullScreen: $isImageFullScreen, viewModel: viewModel, folderName: folderName)
             }
@@ -136,7 +136,7 @@ struct HeaderComponent: View {
                 Image("IconLogo")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 200, height: 200)
+                    .frame(width: 100, height: 100)
                 Spacer()
                 Button(action: {
                     withAnimation {
@@ -146,7 +146,7 @@ struct HeaderComponent: View {
                     Image("IconQuestion")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: 100, height: 200)
+                        .frame(width: 100, height: 100)
                 }
             }
             .padding([.leading, .trailing], 40)

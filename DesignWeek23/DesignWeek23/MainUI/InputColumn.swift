@@ -110,26 +110,19 @@ extension GenerateButtonSection {
                 }
             }
         }) {
-        ZStack {
-            Image("IconGenerate")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-//                .frame(width: UIImage(named: "IconGenerate")?.size.width ?? 0, height: UIImage(named: "IconGenerate")?.size.height ?? 0)
-
-                .frame(width: 200, height: 200)
-            Text("Generate")
-                .foregroundColor(.white)
-                .font(.headline)
-            
+            ZStack {
+                Image("IconGenerate")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                //                .frame(width: UIImage(named: "IconGenerate")?.size.width ?? 0, height: UIImage(named: "IconGenerate")?.size.height ?? 0)
+                
+                    .frame(width: 200, height: 200)
+                Text("Generate")
+                    .foregroundColor(.white)
+                    .font(.headline)
+                
+            }
         }
-    }
-//        .font(.largeTitle)
-//        .padding()
-//        .background(LinearGradient(gradient: Gradient(colors: [Color.blue, Color.pink]), startPoint: .leading, endPoint: .trailing))
-//        .foregroundColor(.white)
-//        .bold()
-//        .cornerRadius(25)
-//        .padding()
         .shadow(color: .black, radius: 5, x: 5, y: 5)
     }
 }
