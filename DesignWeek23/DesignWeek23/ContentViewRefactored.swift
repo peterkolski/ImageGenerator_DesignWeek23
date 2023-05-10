@@ -12,7 +12,7 @@ struct ContentViewRefactored: View {
     @State private var isImageFullScreen = false
     @State private var showOnboarding = false
     @State private var showPicker = false
-    @StateObject var viewModel = ImageGeneratorModel()
+    @StateObject var imageGeneratorModel = ImageGeneratorModel()
     private var folderName: String = "DesignWeekAppOutput"
     @StateObject private var screensaverTimer = ScreensaverTimer(interval: 30) {
         print("Screensaver timeout")
@@ -32,7 +32,7 @@ struct ContentViewRefactored: View {
             VStack {
 
                 
-                MainContent(isFullScreen: $isImageFullScreen, viewModel: viewModel, folderName: folderName)
+                MainContent(isFullScreen: $isImageFullScreen, viewModel: imageGeneratorModel, folderName: folderName)
             }
             
             if showOnboarding {
@@ -40,8 +40,8 @@ struct ContentViewRefactored: View {
                     .transition(.opacity)
             }
             
-            if viewModel.isLoading {
-                LoadingOverlay(isLoading: viewModel.isLoading)
+            if imageGeneratorModel.isLoading {
+                LoadingOverlay(isLoading: imageGeneratorModel.isLoading)
             }
             
             if showScreensaver {
@@ -55,7 +55,7 @@ struct ContentViewRefactored: View {
                     }
             }
             
-            if viewModel.folderURL == nil {
+            if imageGeneratorModel.folderURL == nil {
                 Button("Select Folder") {
                     showPicker = true
                 }
@@ -64,7 +64,7 @@ struct ContentViewRefactored: View {
                 .background(Color.red)
                 .cornerRadius(40)
                 .sheet(isPresented: $showPicker, content: {
-                    FolderPicker(selectedFolderURL: $viewModel.folderURL)
+                    FolderPicker(selectedFolderURL: $imageGeneratorModel.folderURL)
                 })
             }
         }
@@ -92,6 +92,9 @@ struct ContentViewRefactored: View {
         .simultaneousGesture(TapGesture().onEnded {
             screensaverTimer.userInteraction()
         })
+        .alert(item: $imageGeneratorModel.errorMessage) { identifiableError in
+            Alert(title: Text("Error"), message: Text(identifiableError.error), dismissButton: .default(Text("OK")))
+        }
     }
 }
 

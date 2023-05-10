@@ -10,6 +10,10 @@ import SwiftUI
 import UIKit
 import CloudKit
 
+struct IdentifiableError: Identifiable {
+    let id = UUID()
+    var error: String
+}
 
 class ImageGeneratorModel: ObservableObject {
     @Published var folderURL : URL?
@@ -17,7 +21,7 @@ class ImageGeneratorModel: ObservableObject {
     @Published var promtAddition = ""
     @Published var lastText : String? = nil
     @Published var image: UIImage? = nil
-    @Published var errorMessage: String? = nil
+    @Published var errorMessage: IdentifiableError? = nil
     @Published var isLoading = false
     
     // MARK: - generateImage()
@@ -47,7 +51,6 @@ class ImageGeneratorModel: ObservableObject {
             "sampler": "K_DPM_2_ANCESTRAL",
             "samples": 1,
             "steps": 20,
-            // Warning: Heterogeneous collection literal could only be inferred to '[String : Any]'; add explicit type annotation if this is intentional
             "text_prompts": [
                 [
                     "text": text + promtAddition,
@@ -68,8 +71,17 @@ class ImageGeneratorModel: ObservableObject {
         
         request.httpBody = httpBody
         
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
+        let configuration = URLSessionConfiguration.default
+        configuration.timeoutIntervalForRequest = 30.0 // Increase as needed
+        configuration.timeoutIntervalForResource = 60.0 // Increase as needed
+        let session = URLSession(configuration: configuration)
+        
+        session.dataTask(with: request) { (data, response, error) in
             guard let data = data else {
+                DispatchQueue.main.async {
+                    self.errorMessage = IdentifiableError(error: "Unknown error")
+                    self.isLoading = false
+                }
                 completion(.failure(error ?? NSError(domain: "generateImage", code: 3, userInfo: [NSLocalizedDescriptionKey: "Unknown error"])))
                 return
             }
@@ -79,54 +91,61 @@ class ImageGeneratorModel: ObservableObject {
                 self.text = ""
             }
             
-            // Debugging: print raw data
-                        print("INFO: generateImage() - Raw data:")
-                        print(data)
+            print("INFO: generateImage() - Raw data:")
+            print(data)
             
-            // Parse JSON response
             guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+                DispatchQueue.main.async {
+                    self.errorMessage = IdentifiableError(error: "Invalid JSON response")
+                    self.isLoading = false
+                }
                 completion(.failure(NSError(domain: "generateImage", code: 4, userInfo: [NSLocalizedDescriptionKey: "Invalid JSON response"])))
-                self.isLoading = false
                 return
             }
-            
-            // Extract base64-encoded image data from the JSON response
             guard let artifacts = json["artifacts"] as? [[String: Any]],
                   let imageDataString = artifacts.first?["base64"] as? String,
                   let imageData = Data(base64Encoded: imageDataString) else {
+                DispatchQueue.main.async {
+                    self.errorMessage = IdentifiableError(error: "Invalid image data")
+                    self.isLoading = false
+                }
                 completion(.failure(NSError(domain: "generateImage", code: 5, userInfo: [NSLocalizedDescriptionKey: "Invalid image data"])))
-                self.isLoading = false
                 return
             }
             
-            // Debugging: print decoded data
             print("INFO: generateImage() - Decoded data:")
             print(imageData)
             
-            // Convert to UIImage
             guard let image = UIImage(data: imageData) else {
+                DispatchQueue.main.async {
+                    self.errorMessage = IdentifiableError(error: "Invalid image data")
+                    self.isLoading = false
+                }
                 completion(.failure(NSError(domain: "generateImage", code: 6, userInfo: [NSLocalizedDescriptionKey: "Invalid image data"])))
-                self.isLoading = false
                 return
             }
             
-            // Save lastText and image to iCloud
-            // NOTE: lastText, because text was reset
             if let lastText = self.lastText, let folder = self.folderURL {
                 self.saveToFolder(folderURL: folder, text: lastText, image: image)
                 print("INFO: generateImage() -  Saving to folder: \(folder)")
             } else {
+                DispatchQueue.main.async {
+                    self.errorMessage = IdentifiableError(error: "Folder URL is not set.")
+                    self.isLoading = false
+                }
                 print("ERROR: generateImage() - Folder URL is not set.")
             }
             
             DispatchQueue.main.async {
-                self.isLoading = false // Add this line after the request is completed
+                self.isLoading = false
+                self.errorMessage = nil
             }
             print("INFO: generateImage() - Loading image completed")
             
             completion(.success(image))
         }.resume()
     }
+
     
     // MARK: - saveToFolder()
     func saveToFolder(folderURL: URL?, text: String, image: UIImage) {

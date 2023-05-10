@@ -15,7 +15,7 @@ struct InputColumn: View {
         VStack {
             TextInputSection(viewModel: viewModel)
             
-            if let errorMessage = viewModel.errorMessage {
+            if let errorMessage = viewModel.errorMessage?.error {
                 ErrorMessageSection(errorMessage: errorMessage)
             }
             
@@ -105,7 +105,7 @@ extension GenerateButtonSection {
                 case .failure(let error):
                     DispatchQueue.main.async {
                         viewModel.image = nil
-                        viewModel.errorMessage = error.localizedDescription
+                        viewModel.errorMessage?.error = error.localizedDescription
                     }
                 }
             }

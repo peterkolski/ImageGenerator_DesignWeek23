@@ -74,7 +74,7 @@ struct ContentView: View {
                                 
                                 // Display any error message
                                 if let errorMessage = viewModel.errorMessage {
-                                    Text(errorMessage)
+                                    Text(errorMessage.error)
                                         .foregroundColor(.red)
                                         .padding()
                                 }
@@ -111,7 +111,7 @@ struct ContentView: View {
                                             case .failure(let error):
                                                 DispatchQueue.main.async {
                                                     viewModel.image = nil
-                                                    viewModel.errorMessage = error.localizedDescription
+                                                    viewModel.errorMessage?.error = error.localizedDescription
                                                 }
                                             }
                                         }
