@@ -12,16 +12,25 @@ struct OnboardingView: View {
     @State private var currentPageIndex = 0
     
     let pages = [
-        OnboardingPage(image: "hare", text: "What?"),
-        OnboardingPage(image: "tortoise", text: "How?"),
-        OnboardingPage(image: "questionmark", text: "Call to Thinking"),
+        OnboardingPage(image: "brain.head.profile", text: "What?"),
+        OnboardingPage(image: "infinity.circle", text: "What?"),
+        OnboardingPage(image: "cpu", text: "How?"),
+        OnboardingPage(image: "wand.and.rays.inverse", text: "Call to Thinking"),
     ]
     
     var body: some View {
         ZStack {
-            // Set the background color to white and ignore safe area
-            Color("Background Full")
-                .ignoresSafeArea()
+            // Set the background color
+            RadialGradient(
+              gradient: Gradient(colors: [
+                  Color(red: 20.0 / 100, green: 22.0 / 100, blue: 27.0 / 100),
+                  Color(red: 5.0 / 100, green: 6.0 / 100, blue: 10.0 / 100)
+              ]),
+              center: .center,
+              startRadius: 0,
+              endRadius: UIScreen.main.bounds.width / 2
+            )
+            .ignoresSafeArea()
             
             VStack {
                 Spacer()
@@ -32,13 +41,6 @@ struct OnboardingView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                 
                 Spacer()
-                
-                    Text("\(currentPageIndex + 1)/\(pages.count)")
-                    .foregroundColor(Color.red)
-                        .font(.headline)
-                        .padding()
-                    
-                    Spacer()
                     
                     Button(action: {
                         if currentPageIndex + 1 < pages.count {
@@ -54,6 +56,13 @@ struct OnboardingView: View {
                             .foregroundColor(.white)
                             .cornerRadius(30)
                     }
+                    .padding()
+                
+                Spacer()
+                
+                Text("\(currentPageIndex + 1)/\(pages.count)")
+                .foregroundColor(Color.red)
+                    .font(.headline)
                     .padding()
             }
             

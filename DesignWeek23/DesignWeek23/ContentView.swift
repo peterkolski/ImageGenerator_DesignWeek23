@@ -104,6 +104,16 @@ struct BackgroundView: View {
     var body: some View {
         Color("Background Full")
             .edgesIgnoringSafeArea(.all)
+        RadialGradient(
+          gradient: Gradient(colors: [
+              Color(red: 20.0 / 100, green: 22.0 / 100, blue: 27.0 / 100),
+              Color(red: 5.0 / 100, green: 6.0 / 100, blue: 10.0 / 100)
+          ]),
+          center: .center,
+          startRadius: 0,
+          endRadius: UIScreen.main.bounds.width / 2
+        )
+        .ignoresSafeArea()
     }
 }
 

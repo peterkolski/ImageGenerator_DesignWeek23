@@ -12,29 +12,67 @@ import SwiftUI
 struct ScreensaverView: View {
     var body: some View {
         VStack {
-            // Large title
-            Text("Title")
-                .font(.largeTitle)
-                .bold()
-                .padding(.bottom, 20)
+//            // Large title
+//            Text("Title")
+//                .font(.largeTitle)
+//                .bold()
+//                .padding(.bottom, 20)
 
             // Call to action image
-            Image(systemName: "arrow.forward")
-                .font(.system(size: 80))
-                .padding(.bottom, 20)
+            Image("IconLogo")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 1000)
 
             // Subtext
-            Text("Subtext")
-                .font(.body)
+            Text("Revolutionize your design process with AI")
+//                .font(.largeTitle)
+                .font(.system(size: 40))
+                .foregroundColor(.white)
+                .padding(40)
+            
+            // CTA
+            Text("Touch the iPad to try it out")
+                .font(.title)
+                .font(.system(size: 24))
+                .foregroundColor(.white)
+                .padding(30)
+                .background(
+                    LinearGradient(
+                        gradient: Gradient(
+                            colors: [
+                                Color(red: 18/100, green: 9/100, blue: 85/100),
+                                Color(red: 53/100, green: 29/100, blue: 100/100)
+                            ]
+                        ),
+                        startPoint: .leading,
+                        endPoint: .trailing
+                    )
+                    .cornerRadius(100)
+                )
+                .padding(30)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.ultraThinMaterial) // Blurred background
+        .background(
+          RadialGradient(
+            gradient: Gradient(colors: [
+                Color(red: 20.0 / 100, green: 22.0 / 100, blue: 27.0 / 100),
+                Color(red: 5.0 / 100, green: 6.0 / 100, blue: 10.0 / 100)
+            ]),
+            center: .center,
+            startRadius: 0,
+            endRadius: UIScreen.main.bounds.width / 2
+          )
+        )
     }
 }
 
 
 struct ScreesaverView_Previews: PreviewProvider {
     static var previews: some View {
-        ScreensaverView()
+        ZStack {
+            Color("Background Full")
+            ScreensaverView()
+        }
     }
 }

@@ -22,9 +22,13 @@ struct OnboardingPageView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(height: 200)
+                .font(.system(size: 80))
+                .bold()
+                .foregroundColor(.orange)
 
             Text(page.text)
                 .font(.title)
+                .foregroundColor(.white)
                 .padding()
         }
     }
