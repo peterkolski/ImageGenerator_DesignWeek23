@@ -18,14 +18,22 @@ struct OnboardingPageView: View {
 
     var body: some View {
         VStack {
+            let gradient = Gradient(colors: [Color(red: 82/100, green: 13/100, blue: 29/100),
+                                             Color(red: 99/100, green: 56/100, blue: 40/100)])
+            let linearGradient = LinearGradient(gradient: gradient, startPoint: .leading, endPoint: .trailing)
+
+
+            
             Image(systemName: page.image)
                 .resizable()
                 .scaledToFit()
-                .frame(height: 200)
                 .font(.system(size: 80))
-                .bold()
-                .foregroundColor(.orange)
-
+                .frame(height: 200)
+                .overlay(linearGradient.mask(Image(systemName: page.image)
+                    .resizable()
+                    .scaledToFit()
+                    .font(.system(size: 80))))
+        
             Text(page.text)
                 .font(.title)
                 .foregroundColor(.white)

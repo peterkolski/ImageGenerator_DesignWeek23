@@ -12,7 +12,7 @@ struct OnboardingView: View {
     @State private var currentPageIndex = 0
     
     let pages = [
-        OnboardingPage(image: "brain.head.profile", text: "What?"),
+//        OnboardingPage(image: "brain.head.profile", text: "What?"),
         OnboardingPage(image: "infinity.circle", text: "What?"),
         OnboardingPage(image: "cpu", text: "How?"),
         OnboardingPage(image: "wand.and.rays.inverse", text: "Call to Thinking"),

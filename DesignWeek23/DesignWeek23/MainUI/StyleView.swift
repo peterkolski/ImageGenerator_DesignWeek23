@@ -46,6 +46,10 @@ struct StyleView: View {
     @Binding var promtAddition: String
     
     var body: some View {
+        let gradient = Gradient(colors: [Color(red: 82/100, green: 13/100, blue: 29/100),
+                                         Color(red: 99/100, green: 56/100, blue: 40/100)])
+        let linearGradient = LinearGradient(gradient: gradient, startPoint: .leading, endPoint: .trailing)
+        
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 150, maximum: 400))], spacing: 10) {
             ForEach(styles) { style in
                 Button(action: {
@@ -57,7 +61,12 @@ struct StyleView: View {
                         Image(systemName: style.image)
                             .font(.system(size: 80))
                             .bold()
-                            .foregroundColor(.orange)
+//                            .foregroundColor(.orange)
+                            .overlay(linearGradient.mask(Image(systemName: style.image)
+                                .bold()
+//                                .resizable()
+//                                .scaledToFit()
+                                .font(.system(size: 80))))
                         
                         HStack { // Add an HStack here
                             if style == selectedStyle {
