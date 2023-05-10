@@ -24,6 +24,9 @@ class ImageGeneratorModel: ObservableObject {
     @Published var errorMessage: IdentifiableError? = nil
     @Published var isLoading = false
     
+    private let errorMessageInvalidPrompt = "Invalid prompts detected"
+    private let errorMessageInvalidPromptRelace = "The text contains wording which is not allowed.\nPlease change your text and try again."
+    
     // MARK: - generateImage()
     func generateImage(folderName: String, completion: @escaping (Result<UIImage, Error>) -> Void) {
         guard let apiKey = Constants.apiKey else {
@@ -106,11 +109,17 @@ class ImageGeneratorModel: ObservableObject {
             // Check if the JSON contains an error message
             if let message = json["message"] as? String {
                 DispatchQueue.main.async {
-                    self.errorMessage = IdentifiableError(error: message)
-                    self.isLoading = false
                     print("ERROR: generateImage() - \(message)")
+                    if message == self.errorMessageInvalidPrompt{
+//                        self.errorMessage = IdentifiableError(error: self.errorMessageInvalidPromptRelace)
+                        self.errorMessage = IdentifiableError(error: "Hallo du")
+                        print("ERROR: generateImage() - replaced Message")
+                    }else{
+                        self.errorMessage = IdentifiableError(error: message)
+                    }
+                    self.isLoading = false
                 }
-                completion(.failure(NSError(domain: "generateImage", code: 5, userInfo: [NSLocalizedDescriptionKey: message])))
+                completion(.failure(NSError(domain: "generateImage", code: 5, userInfo: [NSLocalizedDescriptionKey: self.errorMessageInvalidPromptRelace])))
                 return
             }
             

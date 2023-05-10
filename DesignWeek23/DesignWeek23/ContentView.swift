@@ -93,7 +93,7 @@ struct ContentView: View {
             screensaverTimer.userInteraction()
         })
         .alert(item: $imageGeneratorModel.errorMessage) { identifiableError in
-            Alert(title: Text("Error"), message: Text(identifiableError.error), dismissButton: .default(Text("OK")))
+            Alert(title: Text("Ups...\nSomething went wrong"), message: Text(identifiableError.error), dismissButton: .default(Text("OK")))
         }
     }
 }
