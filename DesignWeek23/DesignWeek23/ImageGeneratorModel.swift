@@ -62,7 +62,7 @@ class ImageGeneratorModel: ObservableObject {
         DispatchQueue.main.async {
             self.isLoading = true
         }
-        print("INFO: generateImage() - Loading image")
+        print("INFO: generateImage() - Sending data to server: \(urlString)")
         
         guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else {
             completion(.failure(NSError(domain: "generateImage", code: 2, userInfo: [NSLocalizedDescriptionKey: "Invalid request parameters"])))
@@ -102,6 +102,18 @@ class ImageGeneratorModel: ObservableObject {
                 completion(.failure(NSError(domain: "generateImage", code: 4, userInfo: [NSLocalizedDescriptionKey: "Invalid JSON response"])))
                 return
             }
+            
+            // Check if the JSON contains an error message
+            if let message = json["message"] as? String {
+                DispatchQueue.main.async {
+                    self.errorMessage = IdentifiableError(error: message)
+                    self.isLoading = false
+                    print("ERROR: generateImage() - \(message)")
+                }
+                completion(.failure(NSError(domain: "generateImage", code: 5, userInfo: [NSLocalizedDescriptionKey: message])))
+                return
+            }
+            
             guard let artifacts = json["artifacts"] as? [[String: Any]],
                   let imageDataString = artifacts.first?["base64"] as? String,
                   let imageData = Data(base64Encoded: imageDataString) else {
@@ -132,8 +144,8 @@ class ImageGeneratorModel: ObservableObject {
                 DispatchQueue.main.async {
                     self.errorMessage = IdentifiableError(error: "Folder URL is not set.")
                     self.isLoading = false
+                    print("ERROR: generateImage() - Folder URL is not set.")
                 }
-                print("ERROR: generateImage() - Folder URL is not set.")
             }
             
             DispatchQueue.main.async {
