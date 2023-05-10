@@ -59,7 +59,7 @@ class ImageGeneratorModel: ObservableObject {
         DispatchQueue.main.async {
             self.isLoading = true
         }
-        print("Loading image")
+        print("INFO: generateImage() - Loading image")
         
         guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else {
             completion(.failure(NSError(domain: "generateImage", code: 2, userInfo: [NSLocalizedDescriptionKey: "Invalid request parameters"])))
@@ -80,8 +80,8 @@ class ImageGeneratorModel: ObservableObject {
             }
             
             // Debugging: print raw data
-            //            print("Raw data:")
-            //            print(data)
+                        print("INFO: generateImage() - Raw data:")
+                        print(data)
             
             // Parse JSON response
             guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
@@ -100,8 +100,8 @@ class ImageGeneratorModel: ObservableObject {
             }
             
             // Debugging: print decoded data
-            //            print("Decoded data:")
-            //            print(imageData)
+            print("INFO: generateImage() - Decoded data:")
+            print(imageData)
             
             // Convert to UIImage
             guard let image = UIImage(data: imageData) else {
@@ -114,15 +114,15 @@ class ImageGeneratorModel: ObservableObject {
             // NOTE: lastText, because text was reset
             if let lastText = self.lastText, let folder = self.folderURL {
                 self.saveToFolder(folderURL: folder, text: lastText, image: image)
-                print("NOTE: Saving to folder: \(folder)")
+                print("INFO: generateImage() -  Saving to folder: \(folder)")
             } else {
-                print("ERROR: Folder URL is not set.")
+                print("ERROR: generateImage() - Folder URL is not set.")
             }
             
             DispatchQueue.main.async {
                 self.isLoading = false // Add this line after the request is completed
             }
-            print("Loading image completed")
+            print("INFO: generateImage() - Loading image completed")
             
             completion(.success(image))
         }.resume()
