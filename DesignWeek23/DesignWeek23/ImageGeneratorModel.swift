@@ -91,7 +91,7 @@ class ImageGeneratorModel: ObservableObject {
             
             DispatchQueue.main.async {
                 self.lastText = self.text
-                self.text = ""
+//                self.text = ""
             }
             
             print("INFO: generateImage() - Raw data:")

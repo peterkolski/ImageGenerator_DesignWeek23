@@ -45,11 +45,13 @@ struct ContentView: View {
             }
             
             if showScreensaver {
+                
                 ScreensaverView()
                     .transition(.opacity)
                     .onTapGesture {
                         withAnimation {
                             showScreensaver = false
+                            imageGeneratorModel.text = ""
                         }
                         screensaverTimer.resetTimer()
                     }
