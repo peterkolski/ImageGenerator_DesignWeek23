@@ -145,7 +145,7 @@ class ImageGeneratorModel: ObservableObject {
             completion(.success(image))
         }.resume()
     }
-
+    
     
     // MARK: - saveToFolder()
     func saveToFolder(folderURL: URL?, text: String, image: UIImage) {
@@ -154,10 +154,10 @@ class ImageGeneratorModel: ObservableObject {
             print("Folder URL is not provided.")
             return
         }
-
+        
         // Start accessing the URL
         let isAccessing = folderURL.startAccessingSecurityScopedResource()
-
+        
         // Check if the folder exists at the provided URL
         if !FileManager.default.fileExists(atPath: folderURL.path) {
             print("The folder does not exist at the provided URL: \(folderURL.path)")
@@ -169,7 +169,7 @@ class ImageGeneratorModel: ObservableObject {
         
         let fileName = generateFileName(text: text)
         print("NOTE: generated filename: \(fileName)")
-
+        
         // Save the text file
         let textFileURL = folderURL.appendingPathComponent(fileName).appendingPathExtension("txt")
         do {
@@ -178,7 +178,7 @@ class ImageGeneratorModel: ObservableObject {
         } catch {
             print("Error saving text file to the folder: \(error)")
         }
-
+        
         // Save the image file
         let imageFileURL = folderURL.appendingPathComponent(fileName).appendingPathExtension("jpg")
         if let imageData = image.jpegData(compressionQuality: 1.0) {
@@ -191,13 +191,13 @@ class ImageGeneratorModel: ObservableObject {
         } else {
             print("Error converting UIImage to JPEG data.")
         }
-
+        
         // Stop accessing the URL
         if isAccessing {
             folderURL.stopAccessingSecurityScopedResource()
         }
     }
-
+    
     
     // function which generates the filename based on the current date and time and the first 7 words
     func generateFileName(text: String) -> String {

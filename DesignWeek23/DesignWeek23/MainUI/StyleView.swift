@@ -12,7 +12,7 @@ struct Style: Identifiable, Equatable {
     let image: String
     let title: String
     let promptStyleText: String
-
+    
     init(image: String, title: String, promptStyleText: String) {
         self.id = title // Assign the title as the id
         self.image = image
@@ -58,7 +58,7 @@ struct StyleView: View {
                             .font(.system(size: 80))
                             .bold()
                             .foregroundColor(.orange)
-
+                        
                         HStack { // Add an HStack here
                             if style == selectedStyle {
                                 Image(systemName: "checkmark.square") // Display a checkmark box if the style is selected
@@ -67,7 +67,7 @@ struct StyleView: View {
                                 Image(systemName: "square") // Display an empty box if the style is not selected
                                     .foregroundColor(.white)
                             }
-
+                            
                             Text(style.title)
                                 .foregroundColor(.white)
                         }
@@ -75,10 +75,10 @@ struct StyleView: View {
                     .frame(maxWidth: .infinity)
                     .background(Color.clear)
                     .cornerRadius(10)
-//                    .overlay(
-//                        RoundedRectangle(cornerRadius: 10)
-//                            .stroke(style == selectedStyle ? Color.blue : Color.clear, lineWidth: 6)
-//                    )
+                    //                    .overlay(
+                    //                        RoundedRectangle(cornerRadius: 10)
+                    //                            .stroke(style == selectedStyle ? Color.blue : Color.clear, lineWidth: 6)
+                    //                    )
                 }
             }
         }

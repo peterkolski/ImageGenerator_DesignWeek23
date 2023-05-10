@@ -17,9 +17,8 @@
 		DB9CBFE129F2CE8600C83111 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB9CBFE029F2CE8600C83111 /* Assets.xcassets */; };
 		DB9CBFE429F2CE8600C83111 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB9CBFE329F2CE8600C83111 /* Preview Assets.xcassets */; };
 		DB9CBFEB29F2DFEA00C83111 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9CBFEA29F2DFEA00C83111 /* Constants.swift */; };
-		DB9D004B2A08E864005C1C8F /* ContentViewRefactored.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9D004A2A08E864005C1C8F /* ContentViewRefactored.swift */; };
+		DB9D004B2A08E864005C1C8F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9D004A2A08E864005C1C8F /* ContentView.swift */; };
 		DBDC20262A0408E100B31A86 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDC20252A0408E100B31A86 /* ActivityIndicatorView.swift */; };
-		DBE4E54429F2FECE0004BD4A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE4E54329F2FECE0004BD4A /* ContentView.swift */; };
 		DBFC3A6E2A041C980030A0EA /* MyTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC3A6D2A041C980030A0EA /* MyTextFieldStyle.swift */; };
 		DBFC3A702A07C4050030A0EA /* ScreensaverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC3A6F2A07C4050030A0EA /* ScreensaverView.swift */; };
 		DBFC3A732A07C4C50030A0EA /* ScreensaverTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC3A722A07C4C50030A0EA /* ScreensaverTimer.swift */; };
@@ -41,11 +40,10 @@
 		DB9CBFE329F2CE8600C83111 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DB9CBFEA29F2DFEA00C83111 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DB9CBFEC29F2E11D00C83111 /* REST API Play.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "REST API Play.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		DB9D004A2A08E864005C1C8F /* ContentViewRefactored.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewRefactored.swift; sourceTree = "<group>"; };
+		DB9D004A2A08E864005C1C8F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		DBDC20232A03E68800B31A86 /* DesignWeek23.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DesignWeek23.entitlements; sourceTree = "<group>"; };
 		DBDC20242A03EC0D00B31A86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DBDC20252A0408E100B31A86 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
-		DBE4E54329F2FECE0004BD4A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		DBFC3A6D2A041C980030A0EA /* MyTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTextFieldStyle.swift; sourceTree = "<group>"; };
 		DBFC3A6F2A07C4050030A0EA /* ScreensaverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreensaverView.swift; sourceTree = "<group>"; };
 		DBFC3A722A07C4C50030A0EA /* ScreensaverTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreensaverTimer.swift; sourceTree = "<group>"; };
@@ -101,10 +99,9 @@
 				DBDC20232A03E68800B31A86 /* DesignWeek23.entitlements */,
 				DB9CBFEC29F2E11D00C83111 /* REST API Play.playground */,
 				DB9CBFDC29F2CE8500C83111 /* DesignWeek23App.swift */,
-				DBE4E54329F2FECE0004BD4A /* ContentView.swift */,
 				DBFC3A742A07C4FC0030A0EA /* ContentViewTests.swift */,
 				DB5103122A0A8F8E007E36E9 /* FolderPicker.swift */,
-				DB9D004A2A08E864005C1C8F /* ContentViewRefactored.swift */,
+				DB9D004A2A08E864005C1C8F /* ContentView.swift */,
 				DB2C01ED29FD70DA00BD826D /* ImageGeneratorModel.swift */,
 				DBFC3A782A07CE980030A0EA /* Onboarding */,
 				DBFC3A712A07C4AF0030A0EA /* ScreenSaver */,
@@ -218,7 +215,6 @@
 				DB9CBFDD29F2CE8500C83111 /* DesignWeek23App.swift in Sources */,
 				DBFC3A732A07C4C50030A0EA /* ScreensaverTimer.swift in Sources */,
 				DB51030F2A08FD45007E36E9 /* OutputColumn.swift in Sources */,
-				DBE4E54429F2FECE0004BD4A /* ContentView.swift in Sources */,
 				DB9CBFEB29F2DFEA00C83111 /* Constants.swift in Sources */,
 				DB2C01F229FD7FAE00BD826D /* InfoView.swift in Sources */,
 				DB2C01EE29FD70DA00BD826D /* ImageGeneratorModel.swift in Sources */,
@@ -227,7 +223,7 @@
 				DBFC3A702A07C4050030A0EA /* ScreensaverView.swift in Sources */,
 				DBFC3A7A2A07CEA50030A0EA /* OnboardingView.swift in Sources */,
 				DBFC3A772A07CE4E0030A0EA /* OnboardingPage.swift in Sources */,
-				DB9D004B2A08E864005C1C8F /* ContentViewRefactored.swift in Sources */,
+				DB9D004B2A08E864005C1C8F /* ContentView.swift in Sources */,
 				DB5103132A0A8F8E007E36E9 /* FolderPicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
