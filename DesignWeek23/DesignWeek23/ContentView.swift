@@ -35,9 +35,9 @@ struct ContentView: View {
             
             VStack {
                 
-//                if !isImageFullScreen {
-//                    HeaderComponent(showOnboarding: $showOnboarding)
-//                }
+                if !isImageFullScreen {
+                    HeaderComponent(showOnboarding: $showOnboarding)
+                }
                 
                 MainContent(isFullScreen: $isImageFullScreen, viewModel: imageGeneratorModel, folderName: folderName)
             }
@@ -50,22 +50,9 @@ struct ContentView: View {
             if imageGeneratorModel.isLoading {
                 LoadingOverlay(isLoading: imageGeneratorModel.isLoading)
             }
-            if TESTING {
-//                if showScreensaver {
-//
-//                    ScreensaverView()
-//                        .transition(.opacity)
-//                        .onTapGesture {
-//                            withAnimation {
-//                                showScreensaver = false
-//                                imageGeneratorModel.text = ""
-//                            }
-//                            screensaverTimer.resetTimer()
-//                        }
-//                }
-            } else{
+            if !TESTING {
                 if showScreensaver {
-                    
+
                     ScreensaverView()
                         .transition(.opacity)
                         .onTapGesture {
@@ -172,21 +159,21 @@ struct HeaderComponent: View {
                 Image("IconLogo")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 100, height: 100)
+                    .frame(width: 200, height: 100)
                 Spacer()
-                Button(action: {
-                    withAnimation {
-                        showOnboarding = true
-                    }
-                }) {
-                    Image("IconQuestion")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 100, height: 100)
-                }
+//                Button(action: {
+//                    withAnimation {
+//                        showOnboarding = true
+//                    }
+//                }) {
+//                    Image("IconQuestion")
+//                        .resizable()
+//                        .aspectRatio(contentMode: .fit)
+//                        .frame(width: 100, height: 100)
+//                }
             }
-            .padding([.leading, .trailing], 40)
-            //            .padding(10)
+            .padding([.leading], 50)
+//            .padding(10)
         }
     }
 }
