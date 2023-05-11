@@ -116,7 +116,6 @@ extension GenerateButtonSection {
                     .aspectRatio(contentMode: .fit)
                 //                .frame(width: UIImage(named: "IconGenerate")?.size.width ?? 0, height: UIImage(named: "IconGenerate")?.size.height ?? 0)
                 
-                    .frame(width: 200, height: 200)
                 Text("Generate")
                     .foregroundColor(.white)
                     .font(.headline)
