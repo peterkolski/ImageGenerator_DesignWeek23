@@ -14,7 +14,7 @@ struct ContentView: View {
     @State private var showPicker = false
     @StateObject var imageGeneratorModel = ImageGeneratorModel()
     private var folderName: String = "DesignWeekAppOutput"
-    @StateObject private var screensaverTimer = ScreensaverTimer(interval: 30) {
+    @StateObject private var screensaverTimer = ScreensaverTimer(interval: 60*4) {
         print("Screensaver timeout")
     }
     @State private var showScreensaver = false
