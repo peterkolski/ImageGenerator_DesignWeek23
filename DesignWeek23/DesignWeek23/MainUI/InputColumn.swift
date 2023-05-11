@@ -115,7 +115,6 @@ extension GenerateButtonSection {
                 Text("Generate")
                     .foregroundColor(.white)
                     .font(.headline)
-                
             }
         }
         .shadow(color: .black, radius: 5, x: 5, y: 5)
@@ -125,7 +124,7 @@ extension GenerateButtonSection {
 struct InputColumn_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
-            Color.gray
+            Color.black
             InputColumn(viewModel: ImageGeneratorModel(), folderName: "Nix")
         }
     }

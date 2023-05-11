@@ -20,7 +20,7 @@ struct WhiteBigTextStyle: ViewModifier {
 struct RedTextStyle: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .foregroundColor(Color.red)
+            .foregroundColor(Color(red: 99/100, green: 56/100, blue: 40/100))
             .font(.largeTitle)
             .padding(20)
     }
