@@ -100,13 +100,9 @@ extension GenerateButtonSection {
                 case .success(let image):
                     DispatchQueue.main.async {
                         viewModel.image = image
-                        viewModel.errorMessage = nil
                     }
                 case .failure(let error):
-                    DispatchQueue.main.async {
-                        viewModel.image = nil
-                        viewModel.errorMessage?.error = error.localizedDescription
-                    }
+                    print("ERROR: GenerateButtonSection - Not generated viewModel.generateImage(folderName: folderName) ")
                 }
             }
         }) {
