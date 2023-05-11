@@ -5,6 +5,12 @@
 //  Created by Peter Kolski on 08.05.23.
 //
 
+#if DEBUG
+    let TESTING = true
+#else
+    let TESTING = false
+#endif
+
 import SwiftUI
 
 // MARK: - Main View
@@ -26,35 +32,50 @@ struct ContentView: View {
             if isImageFullScreen {
                 FullScreenOverlay(isFullScreen: $isImageFullScreen)
             }
-            if !isImageFullScreen {
-                HeaderComponent(showOnboarding: $showOnboarding)
-            }
+            
             VStack {
                 
+//                if !isImageFullScreen {
+//                    HeaderComponent(showOnboarding: $showOnboarding)
+//                }
                 
                 MainContent(isFullScreen: $isImageFullScreen, viewModel: imageGeneratorModel, folderName: folderName)
             }
             
-            if showOnboarding {
-                OnboardingView(isPresented: $showOnboarding)
-                    .transition(.opacity)
-            }
+            //            if showOnboarding {
+            //                OnboardingView(isPresented: $showOnboarding)
+            //                    .transition(.opacity)
+            //            }
             
             if imageGeneratorModel.isLoading {
                 LoadingOverlay(isLoading: imageGeneratorModel.isLoading)
             }
-            
-            if showScreensaver {
-                
-                ScreensaverView()
-                    .transition(.opacity)
-                    .onTapGesture {
-                        withAnimation {
-                            showScreensaver = false
-                            imageGeneratorModel.text = ""
+            if TESTING {
+//                if showScreensaver {
+//
+//                    ScreensaverView()
+//                        .transition(.opacity)
+//                        .onTapGesture {
+//                            withAnimation {
+//                                showScreensaver = false
+//                                imageGeneratorModel.text = ""
+//                            }
+//                            screensaverTimer.resetTimer()
+//                        }
+//                }
+            } else{
+                if showScreensaver {
+                    
+                    ScreensaverView()
+                        .transition(.opacity)
+                        .onTapGesture {
+                            withAnimation {
+                                showScreensaver = false
+                                imageGeneratorModel.text = ""
+                            }
+                            screensaverTimer.resetTimer()
                         }
-                        screensaverTimer.resetTimer()
-                    }
+                }
             }
             
             if imageGeneratorModel.folderURL == nil {
@@ -107,13 +128,13 @@ struct BackgroundView: View {
         Color("Background Full")
             .edgesIgnoringSafeArea(.all)
         RadialGradient(
-          gradient: Gradient(colors: [
-            Color(red: 20.0 / 100, green: 22.0 / 100, blue: 27.0 / 100),
-            Color.black
-          ]),
-          center: .center,
-          startRadius: 0,
-          endRadius: UIScreen.main.bounds.width / 2
+            gradient: Gradient(colors: [
+                Color(red: 20.0 / 100, green: 22.0 / 100, blue: 27.0 / 100),
+                Color.black
+            ]),
+            center: .center,
+            startRadius: 0,
+            endRadius: UIScreen.main.bounds.width / 2
         )
         .ignoresSafeArea()
     }
@@ -180,13 +201,16 @@ struct MainContent: View {
             HStack {
                 if !isFullScreen {
                     InputColumn(viewModel: viewModel, folderName: folderName)
+                        .frame(width: geometry.size.width * 0.5)
                 }
                 
                 OutputColumn(isFullScreen: $isFullScreen, viewModel: viewModel)
+                    .frame(width: isFullScreen ? geometry.size.width : geometry.size.width * 0.5)
             }
         }
     }
 }
+
 
 
 struct LoadingOverlay: View {
