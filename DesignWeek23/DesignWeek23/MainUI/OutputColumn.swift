@@ -13,6 +13,7 @@ struct OutputColumn: View {
     
     var body: some View {
         VStack {
+            Spacer()
             if !isFullScreen {
                 Text("Click for full screen")
                     .foregroundColor(Color.white)
@@ -24,6 +25,7 @@ struct OutputColumn: View {
             if !isFullScreen {
                 LastTextSection(viewModel: viewModel)
             }
+            Spacer()
         }
     }
 }
@@ -32,37 +34,26 @@ struct GeneratedImageView: View {
     @Binding var isFullScreen: Bool
     @ObservedObject var viewModel: ImageGeneratorModel
     
-    var body: some View {
-        GeometryReader { geometry in
-            if let lastText = viewModel.lastText, let image = viewModel.image {
-                Image(uiImage: image)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: isFullScreen ? geometry.size.width : geometry.size.width * 0.5,
-                           height: isFullScreen ? geometry.size.height : geometry.size.height * 0.5)
-                    .cornerRadius(isFullScreen ? 0 : 10)
-                    .shadow(color: .black, radius: 5, x: 5, y: 5)
-                    .gesture(TapGesture().onEnded {
-                        withAnimation(.easeInOut(duration: 0.3)) {
-                            isFullScreen.toggle()
-                        }
-                    })
-                    .edgesIgnoringSafeArea(isFullScreen ? .all : [])
-            } else {
-                Image("SampleImage")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: isFullScreen ? geometry.size.width : geometry.size.width * 0.5,
-                           height: isFullScreen ? geometry.size.height : geometry.size.height * 0.5)
-                    .foregroundColor(.white)
-                    .gesture(TapGesture().onEnded {
-                        withAnimation(.easeInOut(duration: 0.3)) {
-                            isFullScreen.toggle()
-                        }
-                    })
-                    .edgesIgnoringSafeArea(isFullScreen ? .all : [])
-            }
+    var image: Image {
+        if let uiImage = viewModel.image, let _ = viewModel.lastText {
+            return Image(uiImage: uiImage)
+        } else {
+            return Image("SampleImage")
         }
+    }
+    
+    var body: some View {
+        image
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .cornerRadius(isFullScreen ? 0 : 10)
+            .shadow(color: .black, radius: 5, x: 5, y: 5)
+            .gesture(TapGesture().onEnded {
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    isFullScreen.toggle()
+                }
+            })
+            .edgesIgnoringSafeArea(isFullScreen ? .all : [])
     }
 }
 
