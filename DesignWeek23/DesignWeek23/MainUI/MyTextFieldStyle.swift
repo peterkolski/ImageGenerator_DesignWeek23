@@ -22,6 +22,7 @@ struct RedTextStyle: ViewModifier {
         content
             .foregroundColor(Color(red: 99/100, green: 56/100, blue: 40/100))
             .font(.largeTitle)
+            .bold()
             .padding(20)
     }
 }

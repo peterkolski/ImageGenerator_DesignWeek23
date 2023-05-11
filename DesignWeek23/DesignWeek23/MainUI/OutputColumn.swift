@@ -15,9 +15,9 @@ struct OutputColumn: View {
         VStack {
             Spacer()
             if !isFullScreen {
-                Text("Click for full screen")
+                Text("Touch image for full screen")
                     .foregroundColor(Color.white)
-                Spacer()
+//                Spacer()
             }
             
             GeneratedImageView(isFullScreen: $isFullScreen, viewModel: viewModel)
