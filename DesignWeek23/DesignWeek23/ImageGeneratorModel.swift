@@ -53,7 +53,7 @@ class ImageGeneratorModel: ObservableObject {
             "width": Constants.imageWidth,
             "sampler": "K_DPM_2_ANCESTRAL",
             "samples": 1,
-            "steps": 20,
+            "steps": 50,
             "text_prompts": [
                 [
                     "text": text + promtAddition,

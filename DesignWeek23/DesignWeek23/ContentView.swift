@@ -217,7 +217,7 @@ struct LoadingOverlay: View {
                 .overlay(
                     VStack {
                         ActivityIndicatorView()
-                        Text("Generating AI image...")
+                        Text("Generating AI image")
                             .foregroundColor(.white)
                             .padding(.top, 8)
                     }

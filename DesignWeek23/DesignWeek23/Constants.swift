@@ -9,7 +9,8 @@ import Foundation
 
 struct Constants {
     static let apiKey : String? = "sk-zUcWdOuTDjZR3gURbarc49AI7YOS5DMNk8b07V9g5v8hkVGl"
-    static let engineID = "stable-diffusion-512-v2-1"
+//    static let engineID = "stable-diffusion-512-v2-1"
+    static let engineID = "stable-diffusion-xl-beta-v2-2-2"
     static let imageWidth = 512
     static let imageHeight = 512
 }
