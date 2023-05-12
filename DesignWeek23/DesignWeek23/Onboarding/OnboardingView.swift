@@ -13,9 +13,22 @@ struct OnboardingView: View {
     
     let pages = [
 //        OnboardingPage(image: "brain.head.profile", text: "What?"),
-        OnboardingPage(image: "infinity.circle", text: "What?"),
-        OnboardingPage(image: "cpu", text: "How?"),
-        OnboardingPage(image: "wand.and.rays.inverse", text: "Call to Thinking"),
+        OnboardingPage(image: "infinity.circle",
+                       title: "What?",
+                       subtext:
+"""
+You can create yourself images
+This is not a production tool
+Input text
+"""),
+        OnboardingPage(image: "cpu",
+                       title: "How?",
+                       subtext: """
+"""),
+        OnboardingPage(image: "wand.and.rays.inverse",
+                       title: "Call to Thinking",
+                       subtext: """
+"""),
     ]
     
     var body: some View {
@@ -35,7 +48,7 @@ struct OnboardingView: View {
             VStack {
                 Spacer()
                 
-                OnboardingPageView(page: pages[currentPageIndex])
+                OnboardingTextView(page: pages[currentPageIndex])
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .edgesIgnoringSafeArea(.all)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
