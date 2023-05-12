@@ -12,12 +12,8 @@ struct InputColumn: View {
     var folderName: String
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             TextInputSection(viewModel: viewModel)
-            
-            if let errorMessage = viewModel.errorMessage?.error {
-                ErrorMessageSection(errorMessage: errorMessage)
-            }
             
             StyleSelectionSection(viewModel: viewModel)
             
@@ -43,6 +39,7 @@ struct TextInputSection: View {
                 .modifier(MyTextFieldStyle())
                 .lineLimit(4, reservesSpace: true)
                 .padding([.leading, .trailing], 50)
+                .padding([.top,.bottom], -30)
         }
     }
 }
@@ -87,6 +84,7 @@ struct GenerateButtonSection: View {
             Text("3.")
                 .modifier(RedTextStyle())
             generateButton
+                .padding(.trailing,70)
             Spacer()
         }
         .padding(10)
@@ -107,16 +105,19 @@ extension GenerateButtonSection {
                 }
             }
         }) {
-            ZStack {
-                Image("IconGenerate")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                //                .frame(width: UIImage(named: "IconGenerate")?.size.width ?? 0, height: UIImage(named: "IconGenerate")?.size.height ?? 0)
-                
-                Text("Generate")
-                    .foregroundColor(.white)
-                    .font(.headline)
-            }
+            let gradient = Gradient(colors: [Color(red: 19/100, green: 9/100, blue: 84/100),
+                                             Color(red: 54/100, green: 34/100, blue: 96/100)])
+            let linearGradient = LinearGradient(gradient: gradient, startPoint: .leading, endPoint: .trailing)
+            
+            Text("Generate")
+                .font(.title)
+                .bold()
+                .foregroundColor(.white)
+                .padding(10)
+                .padding([.leading, .trailing], 90)
+                .background(linearGradient)
+                .cornerRadius(60)
+                .frame(maxWidth: .infinity)
         }
         .shadow(color: .black, radius: 5, x: 5, y: 5)
     }

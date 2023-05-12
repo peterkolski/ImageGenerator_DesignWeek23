@@ -62,12 +62,19 @@ Input text
                             isPresented = false
                         }
                     }) {
+                        let gradient = Gradient(colors: [Color(red: 19/100, green: 9/100, blue: 84/100),
+                                                         Color(red: 54/100, green: 34/100, blue: 96/100)])
+                        let linearGradient = LinearGradient(gradient: gradient, startPoint: .leading, endPoint: .trailing)
+                        
                         Text(currentPageIndex + 1 < pages.count ? "Next" : "Close")
+                            .font(.title)
+            //                .font(.system(size: 50))
                             .bold()
-                            .padding()
-                            .background(Color.blue)
                             .foregroundColor(.white)
-                            .cornerRadius(30)
+                            .padding(20)
+                            .padding([.leading, .trailing], 50)
+                            .background(linearGradient)
+                            .cornerRadius(60)
                     }
                     .padding()
                 
@@ -75,7 +82,8 @@ Input text
                 
                 Text("\(currentPageIndex + 1)/\(pages.count)")
                 .foregroundColor(Color.red)
-                    .font(.headline)
+                    .font(.system(size: 25))
+                    .bold()
                     .padding()
             }
             

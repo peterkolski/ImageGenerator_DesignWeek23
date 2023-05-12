@@ -40,7 +40,7 @@ struct OnboardingTextView: View {
                 .font(.system(size: 50))
                 .bold()
                 .foregroundColor(.white)
-                .padding(30)
+                .padding(60)
             
             Text(page.subtext)
                 .multilineTextAlignment(.center)
