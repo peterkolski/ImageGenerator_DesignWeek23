@@ -189,6 +189,7 @@ struct MainContent: View {
         GeometryReader { geometry in
             HStack {
                 if !isFullScreen {
+                    // TODO: Somehow the Button is too low
                     InputColumn(viewModel: viewModel, folderName: folderName)
                         .frame(width: geometry.size.width * 0.5)
                 }

@@ -22,6 +22,7 @@ struct InputColumn: View {
             StyleSelectionSection(viewModel: viewModel)
             
             GenerateButtonSection(viewModel: viewModel, folderName: folderName)
+            Spacer()
         }
     }
 }
