@@ -162,16 +162,17 @@ struct HeaderComponent: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 200, height: 100)
                 Spacer()
-//                Button(action: {
-//                    withAnimation {
-//                        showOnboarding = true
-//                    }
-//                }) {
-//                    Image("IconQuestion")
-//                        .resizable()
-//                        .aspectRatio(contentMode: .fit)
-//                        .frame(width: 100, height: 100)
-//                }
+                Button(action: {
+                    withAnimation {
+                        showOnboarding = true
+                    }
+                }) {
+                    Image("IconQuestion")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 60, height: 60)
+                        .padding(20)
+                }
             }
             .padding([.leading], 50)
 //            .padding(10)
