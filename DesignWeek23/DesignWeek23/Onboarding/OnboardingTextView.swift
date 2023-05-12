@@ -10,10 +10,11 @@ import SwiftUI
 struct OnboardingPage: Identifiable, Equatable {
     var id = UUID()
     let image: String
-    let text: String
+    let title: String
+    let subtext: String
 }
 
-struct OnboardingPageView: View {
+struct OnboardingTextView: View {
     let page: OnboardingPage
 
     var body: some View {
@@ -34,10 +35,22 @@ struct OnboardingPageView: View {
                     .scaledToFit()
                     .font(.system(size: 80))))
         
-            Text(page.text)
-                .font(.title)
+            Text(page.title)
+//                .font(.title)
+                .font(.system(size: 50))
+                .bold()
                 .foregroundColor(.white)
-                .padding()
+                .padding(30)
+            
+            Text(page.subtext)
+                .multilineTextAlignment(.center)
+                .lineSpacing(10)
+                .font(.title)
+//                .font(.system(size: 50))
+                .bold()
+                .foregroundColor(.white)
+//                .padding()
+
         }
     }
 }
