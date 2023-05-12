@@ -111,8 +111,7 @@ class ImageGeneratorModel: ObservableObject {
                 DispatchQueue.main.async {
                     print("ERROR: generateImage() - \(message)")
                     if message == self.errorMessageInvalidPrompt{
-//                        self.errorMessage = IdentifiableError(error: self.errorMessageInvalidPromptRelace)
-                        self.errorMessage = IdentifiableError(error: "Hallo du")
+                        self.errorMessage = IdentifiableError(error: self.errorMessageInvalidPromptRelace)
                         print("ERROR: generateImage() - replaced Message")
                     }else{
                         self.errorMessage = IdentifiableError(error: message)
