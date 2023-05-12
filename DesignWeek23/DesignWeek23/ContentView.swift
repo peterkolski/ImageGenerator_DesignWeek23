@@ -213,15 +213,21 @@ struct LoadingOverlay: View {
             
             RoundedRectangle(cornerRadius: 10)
                 .fill(Color.black.opacity(0.7))
-                .frame(width: 120, height: 120)
+                .frame(width: 150, height: 150)
                 .overlay(
                     VStack {
                         ActivityIndicatorView()
+                            .padding(10)
                         Text("Generating AI image")
+                            .multilineTextAlignment(.center)
                             .foregroundColor(.white)
-                            .padding(.top, 8)
+                            .bold()
+//                            .padding()
+//                            .padding(.top, 8)
                     }
+                        .padding()
                 )
+                
         }
     }
 }
@@ -230,7 +236,11 @@ struct LoadingOverlay: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
-            .previewDevice(PreviewDevice(rawValue: "iPad Pro (11-inch) (4th generation)"))
+        ZStack{
+            Color.red
+            LoadingOverlay(isLoading: true)
+            //        ContentView()
+                .previewDevice(PreviewDevice(rawValue: "iPad Pro (11-inch) (4th generation)"))
+        }
     }
 }
