@@ -42,10 +42,10 @@ struct ContentView: View {
                 MainContent(isFullScreen: $isImageFullScreen, viewModel: imageGeneratorModel, folderName: folderName)
             }
             
-            //            if showOnboarding {
-            //                OnboardingView(isPresented: $showOnboarding)
-            //                    .transition(.opacity)
-            //            }
+            if showOnboarding {
+                OnboardingView(isPresented: $showOnboarding)
+                    .transition(.opacity)
+            }
             
             if imageGeneratorModel.isLoading {
                 LoadingOverlay(isLoading: imageGeneratorModel.isLoading)
@@ -63,20 +63,21 @@ struct ContentView: View {
                             screensaverTimer.resetTimer()
                         }
                 }
+                
+                if imageGeneratorModel.folderURL == nil {
+                    Button("Select Folder") {
+                        showPicker = true
+                    }
+                    .font(.largeTitle)
+                    .padding(30)
+                    .background(Color.red)
+                    .cornerRadius(40)
+                    .sheet(isPresented: $showPicker, content: {
+                        FolderPicker(selectedFolderURL: $imageGeneratorModel.folderURL)
+                    })
+                }
             }
             
-            if imageGeneratorModel.folderURL == nil {
-                Button("Select Folder") {
-                    showPicker = true
-                }
-                .font(.largeTitle)
-                .padding(30)
-                .background(Color.red)
-                .cornerRadius(40)
-                .sheet(isPresented: $showPicker, content: {
-                    FolderPicker(selectedFolderURL: $imageGeneratorModel.folderURL)
-                })
-            }
         }
         .edgesIgnoringSafeArea(.all)
         .gesture(
