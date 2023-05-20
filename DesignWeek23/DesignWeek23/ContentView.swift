@@ -238,8 +238,8 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack{
             Color.red
-            LoadingOverlay(isLoading: true)
-            //        ContentView()
+//            LoadingOverlay(isLoading: true)
+            ContentView()
                 .previewDevice(PreviewDevice(rawValue: "iPad Pro (11-inch) (4th generation)"))
         }
     }

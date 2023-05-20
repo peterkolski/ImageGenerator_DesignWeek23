@@ -17,17 +17,23 @@ struct OnboardingView: View {
                        title: "What?",
                        subtext:
 """
-You can create yourself images
-This is not a production tool
-Input text
+You will be able to create images via text
+This is a demonstrator of what AI is capable now
 """),
         OnboardingPage(image: "cpu",
                        title: "How?",
                        subtext: """
+The AI algorithm used is called ‚Stable Diffusion‘
+Type text and generate images via AI
+Try to explain as many details of the theme as possible
+Choose the style of the image
 """),
         OnboardingPage(image: "wand.and.rays.inverse",
-                       title: "Call to Thinking",
+                       title: "Are we resilient?",
                        subtext: """
+Will AI replace designers or be a helper?
+Is using AI easy, or a new skill?
+Are we resilient to adapt to the newest developments?
 """),
     ]
     
